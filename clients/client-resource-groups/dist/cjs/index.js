@@ -1,0 +1,27 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+tslib_1.__exportStar(require("./ResourceGroupsClient"), exports);
+tslib_1.__exportStar(require("./ResourceGroups"), exports);
+tslib_1.__exportStar(require("./commands/CreateGroupCommand"), exports);
+tslib_1.__exportStar(require("./commands/DeleteGroupCommand"), exports);
+tslib_1.__exportStar(require("./commands/GetGroupCommand"), exports);
+tslib_1.__exportStar(require("./commands/GetGroupConfigurationCommand"), exports);
+tslib_1.__exportStar(require("./commands/GetGroupQueryCommand"), exports);
+tslib_1.__exportStar(require("./commands/GetTagsCommand"), exports);
+tslib_1.__exportStar(require("./commands/GroupResourcesCommand"), exports);
+tslib_1.__exportStar(require("./commands/ListGroupResourcesCommand"), exports);
+tslib_1.__exportStar(require("./pagination/ListGroupResourcesPaginator"), exports);
+tslib_1.__exportStar(require("./commands/ListGroupsCommand"), exports);
+tslib_1.__exportStar(require("./pagination/ListGroupsPaginator"), exports);
+tslib_1.__exportStar(require("./commands/PutGroupConfigurationCommand"), exports);
+tslib_1.__exportStar(require("./commands/SearchResourcesCommand"), exports);
+tslib_1.__exportStar(require("./pagination/SearchResourcesPaginator"), exports);
+tslib_1.__exportStar(require("./commands/TagCommand"), exports);
+tslib_1.__exportStar(require("./commands/UngroupResourcesCommand"), exports);
+tslib_1.__exportStar(require("./commands/UntagCommand"), exports);
+tslib_1.__exportStar(require("./commands/UpdateGroupCommand"), exports);
+tslib_1.__exportStar(require("./commands/UpdateGroupQueryCommand"), exports);
+tslib_1.__exportStar(require("./pagination/Interfaces"), exports);
+tslib_1.__exportStar(require("./models/index"), exports);
+//# sourceMappingURL=index.js.map

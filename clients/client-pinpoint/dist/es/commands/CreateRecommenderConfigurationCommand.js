@@ -1,0 +1,65 @@
+import { __extends } from "tslib";
+import { CreateRecommenderConfigurationRequest, CreateRecommenderConfigurationResponse } from "../models/models_0";
+import { deserializeAws_restJson1CreateRecommenderConfigurationCommand, serializeAws_restJson1CreateRecommenderConfigurationCommand, } from "../protocols/Aws_restJson1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Creates an Amazon Pinpoint configuration for a recommender model.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { PinpointClient, CreateRecommenderConfigurationCommand } from "@aws-sdk/client-pinpoint"; // ES Modules import
+ * // const { PinpointClient, CreateRecommenderConfigurationCommand } = require("@aws-sdk/client-pinpoint"); // CommonJS import
+ * const client = new PinpointClient(config);
+ * const command = new CreateRecommenderConfigurationCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link CreateRecommenderConfigurationCommandInput} for command's `input` shape.
+ * @see {@link CreateRecommenderConfigurationCommandOutput} for command's `response` shape.
+ * @see {@link PinpointClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var CreateRecommenderConfigurationCommand = /** @class */ (function (_super) {
+    __extends(CreateRecommenderConfigurationCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function CreateRecommenderConfigurationCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    CreateRecommenderConfigurationCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "PinpointClient";
+        var commandName = "CreateRecommenderConfigurationCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: CreateRecommenderConfigurationRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: CreateRecommenderConfigurationResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    CreateRecommenderConfigurationCommand.prototype.serialize = function (input, context) {
+        return serializeAws_restJson1CreateRecommenderConfigurationCommand(input, context);
+    };
+    CreateRecommenderConfigurationCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_restJson1CreateRecommenderConfigurationCommand(output, context);
+    };
+    return CreateRecommenderConfigurationCommand;
+}($Command));
+export { CreateRecommenderConfigurationCommand };
+//# sourceMappingURL=CreateRecommenderConfigurationCommand.js.map

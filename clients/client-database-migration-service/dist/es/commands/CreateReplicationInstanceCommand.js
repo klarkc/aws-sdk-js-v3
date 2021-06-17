@@ -1,0 +1,70 @@
+import { __extends } from "tslib";
+import { CreateReplicationInstanceMessage, CreateReplicationInstanceResponse } from "../models/models_0";
+import { deserializeAws_json1_1CreateReplicationInstanceCommand, serializeAws_json1_1CreateReplicationInstanceCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Creates the replication instance using the specified parameters.</p>
+ *          <p>AWS DMS requires that your account have certain roles with appropriate permissions
+ *          before you can create a replication instance. For information on the required roles, see
+ *       <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.APIRole">Creating the IAM Roles to Use With the AWS CLI and AWS DMS API</a>. For
+ *          information on the required permissions, see
+ *       <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.IAMPermissions">IAM Permissions Needed to Use AWS DMS</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DatabaseMigrationServiceClient, CreateReplicationInstanceCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
+ * // const { DatabaseMigrationServiceClient, CreateReplicationInstanceCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * const client = new DatabaseMigrationServiceClient(config);
+ * const command = new CreateReplicationInstanceCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link CreateReplicationInstanceCommandInput} for command's `input` shape.
+ * @see {@link CreateReplicationInstanceCommandOutput} for command's `response` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var CreateReplicationInstanceCommand = /** @class */ (function (_super) {
+    __extends(CreateReplicationInstanceCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function CreateReplicationInstanceCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    CreateReplicationInstanceCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "DatabaseMigrationServiceClient";
+        var commandName = "CreateReplicationInstanceCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: CreateReplicationInstanceMessage.filterSensitiveLog,
+            outputFilterSensitiveLog: CreateReplicationInstanceResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    CreateReplicationInstanceCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1CreateReplicationInstanceCommand(input, context);
+    };
+    CreateReplicationInstanceCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1CreateReplicationInstanceCommand(output, context);
+    };
+    return CreateReplicationInstanceCommand;
+}($Command));
+export { CreateReplicationInstanceCommand };
+//# sourceMappingURL=CreateReplicationInstanceCommand.js.map

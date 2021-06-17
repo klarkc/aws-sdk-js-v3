@@ -1,0 +1,17 @@
+import { DeleteObjectCommandInput, DeleteObjectCommandOutput } from "../commands/DeleteObjectCommand";
+import { DescribeObjectCommandInput, DescribeObjectCommandOutput } from "../commands/DescribeObjectCommand";
+import { GetObjectCommandInput, GetObjectCommandOutput } from "../commands/GetObjectCommand";
+import { ListItemsCommandInput, ListItemsCommandOutput } from "../commands/ListItemsCommand";
+import { PutObjectCommandInput, PutObjectCommandOutput } from "../commands/PutObjectCommand";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
+import { SerdeContext as __SerdeContext } from "@aws-sdk/types";
+export declare const serializeAws_restJson1DeleteObjectCommand: (input: DeleteObjectCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1DescribeObjectCommand: (input: DescribeObjectCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1GetObjectCommand: (input: GetObjectCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1ListItemsCommand: (input: ListItemsCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1PutObjectCommand: (input: PutObjectCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const deserializeAws_restJson1DeleteObjectCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<DeleteObjectCommandOutput>;
+export declare const deserializeAws_restJson1DescribeObjectCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<DescribeObjectCommandOutput>;
+export declare const deserializeAws_restJson1GetObjectCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<GetObjectCommandOutput>;
+export declare const deserializeAws_restJson1ListItemsCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<ListItemsCommandOutput>;
+export declare const deserializeAws_restJson1PutObjectCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<PutObjectCommandOutput>;

@@ -1,0 +1,50 @@
+import { OrganizationsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../OrganizationsClient";
+import { ListParentsRequest, ListParentsResponse } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface ListParentsCommandInput extends ListParentsRequest {
+}
+export interface ListParentsCommandOutput extends ListParentsResponse, __MetadataBearer {
+}
+/**
+ * <p>Lists the root or organizational units (OUs) that serve as the immediate parent of the
+ *             specified child OU or account. This operation, along with <a>ListChildren</a>
+ *             enables you to traverse the tree structure that makes up this root.</p>
+ *         <note>
+ *             <p>Always check the <code>NextToken</code> response parameter
+ * for a <code>null</code> value when calling a <code>List*</code> operation. These operations can
+ * occasionally return an empty set of results even when there are more results available. The
+ * <code>NextToken</code> response parameter value is <code>null</code>
+ *                <i>only</i>
+ * when there are no more results to display.</p>
+ *          </note>
+ *         <p>This operation can be called only from the organization's
+ * management account or by a member account that is a delegated administrator for an AWS service.</p>
+ *         <note>
+ *             <p>In the current release, a child can have only a single parent.</p>
+ *         </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { OrganizationsClient, ListParentsCommand } from "@aws-sdk/client-organizations"; // ES Modules import
+ * // const { OrganizationsClient, ListParentsCommand } = require("@aws-sdk/client-organizations"); // CommonJS import
+ * const client = new OrganizationsClient(config);
+ * const command = new ListParentsCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link ListParentsCommandInput} for command's `input` shape.
+ * @see {@link ListParentsCommandOutput} for command's `response` shape.
+ * @see {@link OrganizationsClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class ListParentsCommand extends $Command<ListParentsCommandInput, ListParentsCommandOutput, OrganizationsClientResolvedConfig> {
+    readonly input: ListParentsCommandInput;
+    constructor(input: ListParentsCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: OrganizationsClientResolvedConfig, options?: __HttpHandlerOptions): Handler<ListParentsCommandInput, ListParentsCommandOutput>;
+    private serialize;
+    private deserialize;
+}

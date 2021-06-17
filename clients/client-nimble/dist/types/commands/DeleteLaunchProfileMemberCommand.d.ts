@@ -1,0 +1,35 @@
+import { NimbleClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../NimbleClient";
+import { DeleteLaunchProfileMemberRequest, DeleteLaunchProfileMemberResponse } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface DeleteLaunchProfileMemberCommandInput extends DeleteLaunchProfileMemberRequest {
+}
+export interface DeleteLaunchProfileMemberCommandOutput extends DeleteLaunchProfileMemberResponse, __MetadataBearer {
+}
+/**
+ * <p>Delete a user from launch profile membership.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { NimbleClient, DeleteLaunchProfileMemberCommand } from "@aws-sdk/client-nimble"; // ES Modules import
+ * // const { NimbleClient, DeleteLaunchProfileMemberCommand } = require("@aws-sdk/client-nimble"); // CommonJS import
+ * const client = new NimbleClient(config);
+ * const command = new DeleteLaunchProfileMemberCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DeleteLaunchProfileMemberCommandInput} for command's `input` shape.
+ * @see {@link DeleteLaunchProfileMemberCommandOutput} for command's `response` shape.
+ * @see {@link NimbleClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class DeleteLaunchProfileMemberCommand extends $Command<DeleteLaunchProfileMemberCommandInput, DeleteLaunchProfileMemberCommandOutput, NimbleClientResolvedConfig> {
+    readonly input: DeleteLaunchProfileMemberCommandInput;
+    constructor(input: DeleteLaunchProfileMemberCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: NimbleClientResolvedConfig, options?: __HttpHandlerOptions): Handler<DeleteLaunchProfileMemberCommandInput, DeleteLaunchProfileMemberCommandOutput>;
+    private serialize;
+    private deserialize;
+}

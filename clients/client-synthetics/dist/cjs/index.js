@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+tslib_1.__exportStar(require("./SyntheticsClient"), exports);
+tslib_1.__exportStar(require("./Synthetics"), exports);
+tslib_1.__exportStar(require("./commands/CreateCanaryCommand"), exports);
+tslib_1.__exportStar(require("./commands/DeleteCanaryCommand"), exports);
+tslib_1.__exportStar(require("./commands/DescribeCanariesCommand"), exports);
+tslib_1.__exportStar(require("./pagination/DescribeCanariesPaginator"), exports);
+tslib_1.__exportStar(require("./commands/DescribeCanariesLastRunCommand"), exports);
+tslib_1.__exportStar(require("./pagination/DescribeCanariesLastRunPaginator"), exports);
+tslib_1.__exportStar(require("./commands/DescribeRuntimeVersionsCommand"), exports);
+tslib_1.__exportStar(require("./pagination/DescribeRuntimeVersionsPaginator"), exports);
+tslib_1.__exportStar(require("./commands/GetCanaryCommand"), exports);
+tslib_1.__exportStar(require("./commands/GetCanaryRunsCommand"), exports);
+tslib_1.__exportStar(require("./pagination/GetCanaryRunsPaginator"), exports);
+tslib_1.__exportStar(require("./commands/ListTagsForResourceCommand"), exports);
+tslib_1.__exportStar(require("./commands/StartCanaryCommand"), exports);
+tslib_1.__exportStar(require("./commands/StopCanaryCommand"), exports);
+tslib_1.__exportStar(require("./commands/TagResourceCommand"), exports);
+tslib_1.__exportStar(require("./commands/UntagResourceCommand"), exports);
+tslib_1.__exportStar(require("./commands/UpdateCanaryCommand"), exports);
+tslib_1.__exportStar(require("./pagination/Interfaces"), exports);
+tslib_1.__exportStar(require("./models/index"), exports);
+//# sourceMappingURL=index.js.map

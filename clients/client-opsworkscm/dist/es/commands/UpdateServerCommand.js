@@ -1,0 +1,70 @@
+import { __extends } from "tslib";
+import { UpdateServerRequest, UpdateServerResponse } from "../models/models_0";
+import { deserializeAws_json1_1UpdateServerCommand, serializeAws_json1_1UpdateServerCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>
+ *       Updates settings for a server.
+ *     </p>
+ *          <p>
+ *       This operation is synchronous.
+ *     </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { OpsWorksCMClient, UpdateServerCommand } from "@aws-sdk/client-opsworkscm"; // ES Modules import
+ * // const { OpsWorksCMClient, UpdateServerCommand } = require("@aws-sdk/client-opsworkscm"); // CommonJS import
+ * const client = new OpsWorksCMClient(config);
+ * const command = new UpdateServerCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link UpdateServerCommandInput} for command's `input` shape.
+ * @see {@link UpdateServerCommandOutput} for command's `response` shape.
+ * @see {@link OpsWorksCMClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var UpdateServerCommand = /** @class */ (function (_super) {
+    __extends(UpdateServerCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function UpdateServerCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    UpdateServerCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "OpsWorksCMClient";
+        var commandName = "UpdateServerCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: UpdateServerRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: UpdateServerResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    UpdateServerCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1UpdateServerCommand(input, context);
+    };
+    UpdateServerCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1UpdateServerCommand(output, context);
+    };
+    return UpdateServerCommand;
+}($Command));
+export { UpdateServerCommand };
+//# sourceMappingURL=UpdateServerCommand.js.map

@@ -1,0 +1,41 @@
+import { LightsailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LightsailClient";
+import { CreateRelationalDatabaseFromSnapshotRequest, CreateRelationalDatabaseFromSnapshotResult } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface CreateRelationalDatabaseFromSnapshotCommandInput extends CreateRelationalDatabaseFromSnapshotRequest {
+}
+export interface CreateRelationalDatabaseFromSnapshotCommandOutput extends CreateRelationalDatabaseFromSnapshotResult, __MetadataBearer {
+}
+/**
+ * <p>Creates a new database from an existing database snapshot in Amazon Lightsail.</p>
+ *          <p>You can create a new database from a snapshot in if something goes wrong with your
+ *       original database, or to change it to a different plan, such as a high availability or
+ *       standard plan.</p>
+ *          <p>The <code>create relational database from snapshot</code> operation supports tag-based
+ *       access control via request tags and resource tags applied to the resource identified by
+ *       relationalDatabaseSnapshotName. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { LightsailClient, CreateRelationalDatabaseFromSnapshotCommand } from "@aws-sdk/client-lightsail"; // ES Modules import
+ * // const { LightsailClient, CreateRelationalDatabaseFromSnapshotCommand } = require("@aws-sdk/client-lightsail"); // CommonJS import
+ * const client = new LightsailClient(config);
+ * const command = new CreateRelationalDatabaseFromSnapshotCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link CreateRelationalDatabaseFromSnapshotCommandInput} for command's `input` shape.
+ * @see {@link CreateRelationalDatabaseFromSnapshotCommandOutput} for command's `response` shape.
+ * @see {@link LightsailClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class CreateRelationalDatabaseFromSnapshotCommand extends $Command<CreateRelationalDatabaseFromSnapshotCommandInput, CreateRelationalDatabaseFromSnapshotCommandOutput, LightsailClientResolvedConfig> {
+    readonly input: CreateRelationalDatabaseFromSnapshotCommandInput;
+    constructor(input: CreateRelationalDatabaseFromSnapshotCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: LightsailClientResolvedConfig, options?: __HttpHandlerOptions): Handler<CreateRelationalDatabaseFromSnapshotCommandInput, CreateRelationalDatabaseFromSnapshotCommandOutput>;
+    private serialize;
+    private deserialize;
+}

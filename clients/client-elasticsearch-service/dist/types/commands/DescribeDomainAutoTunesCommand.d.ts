@@ -1,0 +1,35 @@
+import { ElasticsearchServiceClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ElasticsearchServiceClient";
+import { DescribeDomainAutoTunesRequest, DescribeDomainAutoTunesResponse } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface DescribeDomainAutoTunesCommandInput extends DescribeDomainAutoTunesRequest {
+}
+export interface DescribeDomainAutoTunesCommandOutput extends DescribeDomainAutoTunesResponse, __MetadataBearer {
+}
+/**
+ * <p>Provides scheduled Auto-Tune action details for the Elasticsearch domain, such as Auto-Tune action type, description, severity, and scheduled date.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ElasticsearchServiceClient, DescribeDomainAutoTunesCommand } from "@aws-sdk/client-elasticsearch-service"; // ES Modules import
+ * // const { ElasticsearchServiceClient, DescribeDomainAutoTunesCommand } = require("@aws-sdk/client-elasticsearch-service"); // CommonJS import
+ * const client = new ElasticsearchServiceClient(config);
+ * const command = new DescribeDomainAutoTunesCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DescribeDomainAutoTunesCommandInput} for command's `input` shape.
+ * @see {@link DescribeDomainAutoTunesCommandOutput} for command's `response` shape.
+ * @see {@link ElasticsearchServiceClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class DescribeDomainAutoTunesCommand extends $Command<DescribeDomainAutoTunesCommandInput, DescribeDomainAutoTunesCommandOutput, ElasticsearchServiceClientResolvedConfig> {
+    readonly input: DescribeDomainAutoTunesCommandInput;
+    constructor(input: DescribeDomainAutoTunesCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: ElasticsearchServiceClientResolvedConfig, options?: __HttpHandlerOptions): Handler<DescribeDomainAutoTunesCommandInput, DescribeDomainAutoTunesCommandOutput>;
+    private serialize;
+    private deserialize;
+}

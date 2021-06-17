@@ -1,0 +1,34 @@
+import { HttpRequest } from "@aws-sdk/protocol-http";
+import { CONTEXT_SIGNING_SERVICE } from "./constants";
+import { getOutpostEndpoint } from "./process-arnables-plugin";
+/**
+ * If OutpostId is set, redirect hostname to Outpost one, and change signing service to `s3-outposts`.
+ * Applied to S3Control.CreateBucket and S3Control.ListRegionalBuckets
+ */
+export var redirectFromPostIdMiddleware = function (_a) {
+    var isCustomEndpoint = _a.isCustomEndpoint;
+    return function (next, context) {
+        return function (args) {
+            var input = args.input, request = args.request;
+            if (!HttpRequest.isInstance(request))
+                return next(args);
+            if (input.OutpostId) {
+                request.hostname = getOutpostEndpoint(request.hostname, { isCustomEndpoint: isCustomEndpoint });
+                context[CONTEXT_SIGNING_SERVICE] = "s3-outposts";
+            }
+            return next(args);
+        };
+    };
+};
+export var redirectFromPostIdMiddlewareOptions = {
+    step: "build",
+    name: "redirectFromPostIdMiddleware",
+    tags: ["OUTPOST"],
+    override: true,
+};
+export var getRedirectFromPostIdPlugin = function (options) { return ({
+    applyToStack: function (clientStack) {
+        clientStack.add(redirectFromPostIdMiddleware(options), redirectFromPostIdMiddlewareOptions);
+    },
+}); };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVkaXJlY3QtZnJvbS1wb3N0aWQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvcmVkaXJlY3QtZnJvbS1wb3N0aWQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLFdBQVcsRUFBRSxNQUFNLHdCQUF3QixDQUFDO0FBSXJELE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxNQUFNLGFBQWEsQ0FBQztBQUN0RCxPQUFPLEVBQUUsa0JBQWtCLEVBQUUsTUFBTSwyQkFBMkIsQ0FBQztBQU0vRDs7O0dBR0c7QUFDSCxNQUFNLENBQUMsSUFBTSw0QkFBNEIsR0FDdkMsVUFBQyxFQUFtRDtRQUFqRCxnQkFBZ0Isc0JBQUE7SUFDbkIsT0FBQSxVQUFDLElBQUksRUFBRSxPQUFPO1FBQ2QsT0FBQSxVQUFDLElBQUk7WUFDSyxJQUFBLEtBQUssR0FBYyxJQUFJLE1BQWxCLEVBQUUsT0FBTyxHQUFLLElBQUksUUFBVCxDQUFVO1lBQ2hDLElBQUksQ0FBQyxXQUFXLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQztnQkFBRSxPQUFPLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUN4RCxJQUFJLEtBQUssQ0FBQyxTQUFTLEVBQUU7Z0JBQ25CLE9BQU8sQ0FBQyxRQUFRLEdBQUcsa0JBQWtCLENBQUMsT0FBTyxDQUFDLFFBQVEsRUFBRSxFQUFFLGdCQUFnQixrQkFBQSxFQUFFLENBQUMsQ0FBQztnQkFDOUUsT0FBTyxDQUFDLHVCQUF1QixDQUFDLEdBQUcsYUFBYSxDQUFDO2FBQ2xEO1lBQ0QsT0FBTyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDcEIsQ0FBQztJQVJELENBUUM7QUFURCxDQVNDLENBQUM7QUFFSixNQUFNLENBQUMsSUFBTSxtQ0FBbUMsR0FBd0I7SUFDdEUsSUFBSSxFQUFFLE9BQU87SUFDYixJQUFJLEVBQUUsOEJBQThCO0lBQ3BDLElBQUksRUFBRSxDQUFDLFNBQVMsQ0FBQztJQUNqQixRQUFRLEVBQUUsSUFBSTtDQUNmLENBQUM7QUFFRixNQUFNLENBQUMsSUFBTSwyQkFBMkIsR0FBRyxVQUFDLE9BQWdDLElBQTBCLE9BQUEsQ0FBQztJQUNyRyxZQUFZLEVBQUUsVUFBQyxXQUFXO1FBQ3hCLFdBQVcsQ0FBQyxHQUFHLENBQUMsNEJBQTRCLENBQUMsT0FBTyxDQUFDLEVBQUUsbUNBQW1DLENBQUMsQ0FBQztJQUM5RixDQUFDO0NBQ0YsQ0FBQyxFQUpvRyxDQUlwRyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgSHR0cFJlcXVlc3QgfSBmcm9tIFwiQGF3cy1zZGsvcHJvdG9jb2wtaHR0cFwiO1xuaW1wb3J0IHsgQnVpbGRIYW5kbGVyT3B0aW9ucywgQnVpbGRNaWRkbGV3YXJlLCBQbHVnZ2FibGUgfSBmcm9tIFwiQGF3cy1zZGsvdHlwZXNcIjtcblxuaW1wb3J0IHsgUzNDb250cm9sUmVzb2x2ZWRDb25maWcgfSBmcm9tIFwiLi9jb25maWd1cmF0aW9uc1wiO1xuaW1wb3J0IHsgQ09OVEVYVF9TSUdOSU5HX1NFUlZJQ0UgfSBmcm9tIFwiLi9jb25zdGFudHNcIjtcbmltcG9ydCB7IGdldE91dHBvc3RFbmRwb2ludCB9IGZyb20gXCIuL3Byb2Nlc3MtYXJuYWJsZXMtcGx1Z2luXCI7XG5cbnR5cGUgSW5wdXRUeXBlID0ge1xuICBPdXRwb3N0SWQ/OiBzdHJpbmc7XG59O1xuXG4vKipcbiAqIElmIE91dHBvc3RJZCBpcyBzZXQsIHJlZGlyZWN0IGhvc3RuYW1lIHRvIE91dHBvc3Qgb25lLCBhbmQgY2hhbmdlIHNpZ25pbmcgc2VydmljZSB0byBgczMtb3V0cG9zdHNgLlxuICogQXBwbGllZCB0byBTM0NvbnRyb2wuQ3JlYXRlQnVja2V0IGFuZCBTM0NvbnRyb2wuTGlzdFJlZ2lvbmFsQnVja2V0c1xuICovXG5leHBvcnQgY29uc3QgcmVkaXJlY3RGcm9tUG9zdElkTWlkZGxld2FyZSA9XG4gICh7IGlzQ3VzdG9tRW5kcG9pbnQgfTogeyBpc0N1c3RvbUVuZHBvaW50OiBib29sZWFuIH0pOiBCdWlsZE1pZGRsZXdhcmU8SW5wdXRUeXBlLCBhbnk+ID0+XG4gIChuZXh0LCBjb250ZXh0KSA9PlxuICAoYXJncykgPT4ge1xuICAgIGNvbnN0IHsgaW5wdXQsIHJlcXVlc3QgfSA9IGFyZ3M7XG4gICAgaWYgKCFIdHRwUmVxdWVzdC5pc0luc3RhbmNlKHJlcXVlc3QpKSByZXR1cm4gbmV4dChhcmdzKTtcbiAgICBpZiAoaW5wdXQuT3V0cG9zdElkKSB7XG4gICAgICByZXF1ZXN0Lmhvc3RuYW1lID0gZ2V0T3V0cG9zdEVuZHBvaW50KHJlcXVlc3QuaG9zdG5hbWUsIHsgaXNDdXN0b21FbmRwb2ludCB9KTtcbiAgICAgIGNvbnRleHRbQ09OVEVYVF9TSUdOSU5HX1NFUlZJQ0VdID0gXCJzMy1vdXRwb3N0c1wiO1xuICAgIH1cbiAgICByZXR1cm4gbmV4dChhcmdzKTtcbiAgfTtcblxuZXhwb3J0IGNvbnN0IHJlZGlyZWN0RnJvbVBvc3RJZE1pZGRsZXdhcmVPcHRpb25zOiBCdWlsZEhhbmRsZXJPcHRpb25zID0ge1xuICBzdGVwOiBcImJ1aWxkXCIsXG4gIG5hbWU6IFwicmVkaXJlY3RGcm9tUG9zdElkTWlkZGxld2FyZVwiLFxuICB0YWdzOiBbXCJPVVRQT1NUXCJdLFxuICBvdmVycmlkZTogdHJ1ZSxcbn07XG5cbmV4cG9ydCBjb25zdCBnZXRSZWRpcmVjdEZyb21Qb3N0SWRQbHVnaW4gPSAob3B0aW9uczogUzNDb250cm9sUmVzb2x2ZWRDb25maWcpOiBQbHVnZ2FibGU8YW55LCBhbnk+ID0+ICh7XG4gIGFwcGx5VG9TdGFjazogKGNsaWVudFN0YWNrKSA9PiB7XG4gICAgY2xpZW50U3RhY2suYWRkKHJlZGlyZWN0RnJvbVBvc3RJZE1pZGRsZXdhcmUob3B0aW9ucyksIHJlZGlyZWN0RnJvbVBvc3RJZE1pZGRsZXdhcmVPcHRpb25zKTtcbiAgfSxcbn0pO1xuIl19

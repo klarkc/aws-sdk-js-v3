@@ -1,0 +1,94 @@
+import { __extends } from "tslib";
+import { AdminDisableProviderForUserRequest, AdminDisableProviderForUserResponse } from "../models/models_0";
+import { deserializeAws_json1_1AdminDisableProviderForUserCommand, serializeAws_json1_1AdminDisableProviderForUserCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { getAwsAuthPlugin } from "@aws-sdk/middleware-signing";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Disables the user from signing in with the specified external (SAML or social)
+ *             identity provider. If the user to disable is a Cognito User Pools native username +
+ *             password user, they are not permitted to use their password to sign-in. If the user to
+ *             disable is a linked external IdP user, any link between that user and an existing user
+ *             is removed. The next time the external user (no longer attached to the previously linked
+ *                 <code>DestinationUser</code>) signs in, they must create a new user account. See
+ *                 <a href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminLinkProviderForUser.html">AdminLinkProviderForUser</a>.</p>
+ *         <p>This action is enabled only for admin access and requires developer
+ *             credentials.</p>
+ *         <p>The <code>ProviderName</code> must match the value specified when creating an IdP for
+ *             the pool. </p>
+ *         <p>To disable a native username + password user, the <code>ProviderName</code> value must
+ *             be <code>Cognito</code> and the <code>ProviderAttributeName</code> must be
+ *                 <code>Cognito_Subject</code>, with the <code>ProviderAttributeValue</code> being the
+ *             name that is used in the user pool for the user.</p>
+ *         <p>The <code>ProviderAttributeName</code> must always be <code>Cognito_Subject</code> for
+ *             social identity providers. The <code>ProviderAttributeValue</code> must always be the
+ *             exact subject that was used when the user was originally linked as a source user.</p>
+ *         <p>For de-linking a SAML identity, there are two scenarios. If the linked identity has
+ *             not yet been used to sign-in, the <code>ProviderAttributeName</code> and
+ *                 <code>ProviderAttributeValue</code> must be the same values that were used for the
+ *                 <code>SourceUser</code> when the identities were originally linked using <code>
+ *                 AdminLinkProviderForUser</code> call. (If the linking was done with
+ *                 <code>ProviderAttributeName</code> set to <code>Cognito_Subject</code>, the same
+ *             applies here). However, if the user has already signed in, the
+ *                 <code>ProviderAttributeName</code> must be <code>Cognito_Subject</code> and
+ *                 <code>ProviderAttributeValue</code> must be the subject of the SAML
+ *             assertion.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CognitoIdentityProviderClient, AdminDisableProviderForUserCommand } from "@aws-sdk/client-cognito-identity-provider"; // ES Modules import
+ * // const { CognitoIdentityProviderClient, AdminDisableProviderForUserCommand } = require("@aws-sdk/client-cognito-identity-provider"); // CommonJS import
+ * const client = new CognitoIdentityProviderClient(config);
+ * const command = new AdminDisableProviderForUserCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link AdminDisableProviderForUserCommandInput} for command's `input` shape.
+ * @see {@link AdminDisableProviderForUserCommandOutput} for command's `response` shape.
+ * @see {@link CognitoIdentityProviderClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var AdminDisableProviderForUserCommand = /** @class */ (function (_super) {
+    __extends(AdminDisableProviderForUserCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function AdminDisableProviderForUserCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    AdminDisableProviderForUserCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        this.middlewareStack.use(getAwsAuthPlugin(configuration));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "CognitoIdentityProviderClient";
+        var commandName = "AdminDisableProviderForUserCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: AdminDisableProviderForUserRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: AdminDisableProviderForUserResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    AdminDisableProviderForUserCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1AdminDisableProviderForUserCommand(input, context);
+    };
+    AdminDisableProviderForUserCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1AdminDisableProviderForUserCommand(output, context);
+    };
+    return AdminDisableProviderForUserCommand;
+}($Command));
+export { AdminDisableProviderForUserCommand };
+//# sourceMappingURL=AdminDisableProviderForUserCommand.js.map

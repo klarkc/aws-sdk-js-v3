@@ -1,0 +1,39 @@
+import { IoTSiteWiseClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../IoTSiteWiseClient";
+import { UpdateGatewayCapabilityConfigurationRequest, UpdateGatewayCapabilityConfigurationResponse } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface UpdateGatewayCapabilityConfigurationCommandInput extends UpdateGatewayCapabilityConfigurationRequest {
+}
+export interface UpdateGatewayCapabilityConfigurationCommandOutput extends UpdateGatewayCapabilityConfigurationResponse, __MetadataBearer {
+}
+/**
+ * <p>Updates a gateway capability configuration or defines a new capability configuration.
+ *       Each gateway capability defines data sources for a gateway. A capability configuration
+ *       can contain multiple data source configurations. If you define OPC-UA sources for a gateway in
+ *       the AWS IoT SiteWise console, all of your OPC-UA sources are stored in one capability configuration. To
+ *       list all capability configurations for a gateway, use <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGateway.html">DescribeGateway</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { IoTSiteWiseClient, UpdateGatewayCapabilityConfigurationCommand } from "@aws-sdk/client-iotsitewise"; // ES Modules import
+ * // const { IoTSiteWiseClient, UpdateGatewayCapabilityConfigurationCommand } = require("@aws-sdk/client-iotsitewise"); // CommonJS import
+ * const client = new IoTSiteWiseClient(config);
+ * const command = new UpdateGatewayCapabilityConfigurationCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link UpdateGatewayCapabilityConfigurationCommandInput} for command's `input` shape.
+ * @see {@link UpdateGatewayCapabilityConfigurationCommandOutput} for command's `response` shape.
+ * @see {@link IoTSiteWiseClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class UpdateGatewayCapabilityConfigurationCommand extends $Command<UpdateGatewayCapabilityConfigurationCommandInput, UpdateGatewayCapabilityConfigurationCommandOutput, IoTSiteWiseClientResolvedConfig> {
+    readonly input: UpdateGatewayCapabilityConfigurationCommandInput;
+    constructor(input: UpdateGatewayCapabilityConfigurationCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: IoTSiteWiseClientResolvedConfig, options?: __HttpHandlerOptions): Handler<UpdateGatewayCapabilityConfigurationCommandInput, UpdateGatewayCapabilityConfigurationCommandOutput>;
+    private serialize;
+    private deserialize;
+}

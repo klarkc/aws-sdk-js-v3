@@ -1,0 +1,69 @@
+import { __extends } from "tslib";
+import { DescribeEventsRequest, DescribeEventsResponse } from "../models/models_0";
+import { deserializeAws_json1_1DescribeEventsCommand, serializeAws_json1_1DescribeEventsCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Returns events related to DAX clusters and parameter groups. You can obtain
+ *             events specific to a particular DAX cluster or parameter group by providing the name
+ *             as a parameter.</p>
+ *         <p>By default, only the events occurring within the last 24 hours are returned; however,
+ *             you can retrieve up to 14 days' worth of events if necessary.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DAXClient, DescribeEventsCommand } from "@aws-sdk/client-dax"; // ES Modules import
+ * // const { DAXClient, DescribeEventsCommand } = require("@aws-sdk/client-dax"); // CommonJS import
+ * const client = new DAXClient(config);
+ * const command = new DescribeEventsCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DescribeEventsCommandInput} for command's `input` shape.
+ * @see {@link DescribeEventsCommandOutput} for command's `response` shape.
+ * @see {@link DAXClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var DescribeEventsCommand = /** @class */ (function (_super) {
+    __extends(DescribeEventsCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function DescribeEventsCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    DescribeEventsCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "DAXClient";
+        var commandName = "DescribeEventsCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: DescribeEventsRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: DescribeEventsResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    DescribeEventsCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1DescribeEventsCommand(input, context);
+    };
+    DescribeEventsCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1DescribeEventsCommand(output, context);
+    };
+    return DescribeEventsCommand;
+}($Command));
+export { DescribeEventsCommand };
+//# sourceMappingURL=DescribeEventsCommand.js.map

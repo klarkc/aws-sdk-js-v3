@@ -1,0 +1,17 @@
+import { DeleteThingShadowCommandInput, DeleteThingShadowCommandOutput } from "../commands/DeleteThingShadowCommand";
+import { GetThingShadowCommandInput, GetThingShadowCommandOutput } from "../commands/GetThingShadowCommand";
+import { ListNamedShadowsForThingCommandInput, ListNamedShadowsForThingCommandOutput } from "../commands/ListNamedShadowsForThingCommand";
+import { PublishCommandInput, PublishCommandOutput } from "../commands/PublishCommand";
+import { UpdateThingShadowCommandInput, UpdateThingShadowCommandOutput } from "../commands/UpdateThingShadowCommand";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
+import { SerdeContext as __SerdeContext } from "@aws-sdk/types";
+export declare const serializeAws_restJson1DeleteThingShadowCommand: (input: DeleteThingShadowCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1GetThingShadowCommand: (input: GetThingShadowCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1ListNamedShadowsForThingCommand: (input: ListNamedShadowsForThingCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1PublishCommand: (input: PublishCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1UpdateThingShadowCommand: (input: UpdateThingShadowCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const deserializeAws_restJson1DeleteThingShadowCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<DeleteThingShadowCommandOutput>;
+export declare const deserializeAws_restJson1GetThingShadowCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<GetThingShadowCommandOutput>;
+export declare const deserializeAws_restJson1ListNamedShadowsForThingCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<ListNamedShadowsForThingCommandOutput>;
+export declare const deserializeAws_restJson1PublishCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<PublishCommandOutput>;
+export declare const deserializeAws_restJson1UpdateThingShadowCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<UpdateThingShadowCommandOutput>;

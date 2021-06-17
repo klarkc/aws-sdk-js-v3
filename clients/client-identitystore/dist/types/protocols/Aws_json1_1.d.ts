@@ -1,0 +1,14 @@
+import { DescribeGroupCommandInput, DescribeGroupCommandOutput } from "../commands/DescribeGroupCommand";
+import { DescribeUserCommandInput, DescribeUserCommandOutput } from "../commands/DescribeUserCommand";
+import { ListGroupsCommandInput, ListGroupsCommandOutput } from "../commands/ListGroupsCommand";
+import { ListUsersCommandInput, ListUsersCommandOutput } from "../commands/ListUsersCommand";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
+import { SerdeContext as __SerdeContext } from "@aws-sdk/types";
+export declare const serializeAws_json1_1DescribeGroupCommand: (input: DescribeGroupCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_json1_1DescribeUserCommand: (input: DescribeUserCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_json1_1ListGroupsCommand: (input: ListGroupsCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_json1_1ListUsersCommand: (input: ListUsersCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const deserializeAws_json1_1DescribeGroupCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<DescribeGroupCommandOutput>;
+export declare const deserializeAws_json1_1DescribeUserCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<DescribeUserCommandOutput>;
+export declare const deserializeAws_json1_1ListGroupsCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<ListGroupsCommandOutput>;
+export declare const deserializeAws_json1_1ListUsersCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<ListUsersCommandOutput>;

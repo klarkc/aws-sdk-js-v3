@@ -1,0 +1,71 @@
+import { __extends } from "tslib";
+import { AssignTapePoolInput, AssignTapePoolOutput } from "../models/models_0";
+import { deserializeAws_json1_1AssignTapePoolCommand, serializeAws_json1_1AssignTapePoolCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in
+ *          the S3 storage class that is associated with the pool. When you use your backup application
+ *          to eject the tape, the tape is archived directly into the S3 storage class (S3 Glacier or
+ *          S3 Glacier Deep Archive) that corresponds to the pool.</p>
+ *
+ *          <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>
+ *          </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { StorageGatewayClient, AssignTapePoolCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
+ * // const { StorageGatewayClient, AssignTapePoolCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * const client = new StorageGatewayClient(config);
+ * const command = new AssignTapePoolCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link AssignTapePoolCommandInput} for command's `input` shape.
+ * @see {@link AssignTapePoolCommandOutput} for command's `response` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var AssignTapePoolCommand = /** @class */ (function (_super) {
+    __extends(AssignTapePoolCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function AssignTapePoolCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    AssignTapePoolCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "StorageGatewayClient";
+        var commandName = "AssignTapePoolCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: AssignTapePoolInput.filterSensitiveLog,
+            outputFilterSensitiveLog: AssignTapePoolOutput.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    AssignTapePoolCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1AssignTapePoolCommand(input, context);
+    };
+    AssignTapePoolCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1AssignTapePoolCommand(output, context);
+    };
+    return AssignTapePoolCommand;
+}($Command));
+export { AssignTapePoolCommand };
+//# sourceMappingURL=AssignTapePoolCommand.js.map

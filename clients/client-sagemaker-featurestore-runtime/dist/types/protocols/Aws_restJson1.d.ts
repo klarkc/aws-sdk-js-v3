@@ -1,0 +1,11 @@
+import { DeleteRecordCommandInput, DeleteRecordCommandOutput } from "../commands/DeleteRecordCommand";
+import { GetRecordCommandInput, GetRecordCommandOutput } from "../commands/GetRecordCommand";
+import { PutRecordCommandInput, PutRecordCommandOutput } from "../commands/PutRecordCommand";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
+import { SerdeContext as __SerdeContext } from "@aws-sdk/types";
+export declare const serializeAws_restJson1DeleteRecordCommand: (input: DeleteRecordCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1GetRecordCommand: (input: GetRecordCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1PutRecordCommand: (input: PutRecordCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const deserializeAws_restJson1DeleteRecordCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<DeleteRecordCommandOutput>;
+export declare const deserializeAws_restJson1GetRecordCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<GetRecordCommandOutput>;
+export declare const deserializeAws_restJson1PutRecordCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<PutRecordCommandOutput>;

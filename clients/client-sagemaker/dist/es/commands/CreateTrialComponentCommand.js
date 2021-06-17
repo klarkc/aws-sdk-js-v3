@@ -1,0 +1,81 @@
+import { __extends } from "tslib";
+import { CreateTrialComponentRequest, CreateTrialComponentResponse } from "../models/models_1";
+import { deserializeAws_json1_1CreateTrialComponentCommand, serializeAws_json1_1CreateTrialComponentCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Creates a <i>trial component</i>, which is a stage of a machine learning
+ *         <i>trial</i>. A trial is composed of one or more trial components. A trial
+ *       component can be used in multiple trials.</p>
+ *          <p>Trial components include pre-processing jobs, training jobs, and batch transform
+ *       jobs.</p>
+ *          <p>When you use SageMaker Studio or the SageMaker Python SDK, all experiments, trials, and trial
+ *       components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you
+ *       must use the logging APIs provided by the SDK.</p>
+ *          <p>You can add tags to a trial component and then use the <a>Search</a> API to
+ *       search for the tags.</p>
+ *          <note>
+ *             <p>
+ *                <code>CreateTrialComponent</code> can only be invoked from within an SageMaker managed
+ *         environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker
+ *         notebooks. A call to <code>CreateTrialComponent</code> from outside one of these
+ *         environments results in an error.</p>
+ *          </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { SageMakerClient, CreateTrialComponentCommand } from "@aws-sdk/client-sagemaker"; // ES Modules import
+ * // const { SageMakerClient, CreateTrialComponentCommand } = require("@aws-sdk/client-sagemaker"); // CommonJS import
+ * const client = new SageMakerClient(config);
+ * const command = new CreateTrialComponentCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link CreateTrialComponentCommandInput} for command's `input` shape.
+ * @see {@link CreateTrialComponentCommandOutput} for command's `response` shape.
+ * @see {@link SageMakerClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var CreateTrialComponentCommand = /** @class */ (function (_super) {
+    __extends(CreateTrialComponentCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function CreateTrialComponentCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    CreateTrialComponentCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "SageMakerClient";
+        var commandName = "CreateTrialComponentCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: CreateTrialComponentRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: CreateTrialComponentResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    CreateTrialComponentCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1CreateTrialComponentCommand(input, context);
+    };
+    CreateTrialComponentCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1CreateTrialComponentCommand(output, context);
+    };
+    return CreateTrialComponentCommand;
+}($Command));
+export { CreateTrialComponentCommand };
+//# sourceMappingURL=CreateTrialComponentCommand.js.map

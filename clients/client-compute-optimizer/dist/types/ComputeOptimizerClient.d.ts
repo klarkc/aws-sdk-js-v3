@@ -1,0 +1,156 @@
+import { DescribeRecommendationExportJobsCommandInput, DescribeRecommendationExportJobsCommandOutput } from "./commands/DescribeRecommendationExportJobsCommand";
+import { ExportAutoScalingGroupRecommendationsCommandInput, ExportAutoScalingGroupRecommendationsCommandOutput } from "./commands/ExportAutoScalingGroupRecommendationsCommand";
+import { ExportEBSVolumeRecommendationsCommandInput, ExportEBSVolumeRecommendationsCommandOutput } from "./commands/ExportEBSVolumeRecommendationsCommand";
+import { ExportEC2InstanceRecommendationsCommandInput, ExportEC2InstanceRecommendationsCommandOutput } from "./commands/ExportEC2InstanceRecommendationsCommand";
+import { ExportLambdaFunctionRecommendationsCommandInput, ExportLambdaFunctionRecommendationsCommandOutput } from "./commands/ExportLambdaFunctionRecommendationsCommand";
+import { GetAutoScalingGroupRecommendationsCommandInput, GetAutoScalingGroupRecommendationsCommandOutput } from "./commands/GetAutoScalingGroupRecommendationsCommand";
+import { GetEBSVolumeRecommendationsCommandInput, GetEBSVolumeRecommendationsCommandOutput } from "./commands/GetEBSVolumeRecommendationsCommand";
+import { GetEC2InstanceRecommendationsCommandInput, GetEC2InstanceRecommendationsCommandOutput } from "./commands/GetEC2InstanceRecommendationsCommand";
+import { GetEC2RecommendationProjectedMetricsCommandInput, GetEC2RecommendationProjectedMetricsCommandOutput } from "./commands/GetEC2RecommendationProjectedMetricsCommand";
+import { GetEnrollmentStatusCommandInput, GetEnrollmentStatusCommandOutput } from "./commands/GetEnrollmentStatusCommand";
+import { GetLambdaFunctionRecommendationsCommandInput, GetLambdaFunctionRecommendationsCommandOutput } from "./commands/GetLambdaFunctionRecommendationsCommand";
+import { GetRecommendationSummariesCommandInput, GetRecommendationSummariesCommandOutput } from "./commands/GetRecommendationSummariesCommand";
+import { UpdateEnrollmentStatusCommandInput, UpdateEnrollmentStatusCommandOutput } from "./commands/UpdateEnrollmentStatusCommand";
+import { EndpointsInputConfig, EndpointsResolvedConfig, RegionInputConfig, RegionResolvedConfig } from "@aws-sdk/config-resolver";
+import { HostHeaderInputConfig, HostHeaderResolvedConfig } from "@aws-sdk/middleware-host-header";
+import { RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
+import { AwsAuthInputConfig, AwsAuthResolvedConfig } from "@aws-sdk/middleware-signing";
+import { UserAgentInputConfig, UserAgentResolvedConfig } from "@aws-sdk/middleware-user-agent";
+import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+import { Client as __Client, SmithyConfiguration as __SmithyConfiguration, SmithyResolvedConfiguration as __SmithyResolvedConfiguration } from "@aws-sdk/smithy-client";
+import { Provider, RegionInfoProvider, Credentials as __Credentials, Decoder as __Decoder, Encoder as __Encoder, HashConstructor as __HashConstructor, HttpHandlerOptions as __HttpHandlerOptions, Logger as __Logger, Provider as __Provider, StreamCollector as __StreamCollector, UrlParser as __UrlParser, UserAgent as __UserAgent } from "@aws-sdk/types";
+export declare type ServiceInputTypes = DescribeRecommendationExportJobsCommandInput | ExportAutoScalingGroupRecommendationsCommandInput | ExportEBSVolumeRecommendationsCommandInput | ExportEC2InstanceRecommendationsCommandInput | ExportLambdaFunctionRecommendationsCommandInput | GetAutoScalingGroupRecommendationsCommandInput | GetEBSVolumeRecommendationsCommandInput | GetEC2InstanceRecommendationsCommandInput | GetEC2RecommendationProjectedMetricsCommandInput | GetEnrollmentStatusCommandInput | GetLambdaFunctionRecommendationsCommandInput | GetRecommendationSummariesCommandInput | UpdateEnrollmentStatusCommandInput;
+export declare type ServiceOutputTypes = DescribeRecommendationExportJobsCommandOutput | ExportAutoScalingGroupRecommendationsCommandOutput | ExportEBSVolumeRecommendationsCommandOutput | ExportEC2InstanceRecommendationsCommandOutput | ExportLambdaFunctionRecommendationsCommandOutput | GetAutoScalingGroupRecommendationsCommandOutput | GetEBSVolumeRecommendationsCommandOutput | GetEC2InstanceRecommendationsCommandOutput | GetEC2RecommendationProjectedMetricsCommandOutput | GetEnrollmentStatusCommandOutput | GetLambdaFunctionRecommendationsCommandOutput | GetRecommendationSummariesCommandOutput | UpdateEnrollmentStatusCommandOutput;
+export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+    /**
+     * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+     */
+    requestHandler?: __HttpHandler;
+    /**
+     * A constructor for a class implementing the @aws-sdk/types.Hash interface
+     * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
+     * @internal
+     */
+    sha256?: __HashConstructor;
+    /**
+     * The function that will be used to convert strings into HTTP endpoints.
+     * @internal
+     */
+    urlParser?: __UrlParser;
+    /**
+     * A function that can calculate the length of a request body.
+     * @internal
+     */
+    bodyLengthChecker?: (body: any) => number | undefined;
+    /**
+     * A function that converts a stream into an array of bytes.
+     * @internal
+     */
+    streamCollector?: __StreamCollector;
+    /**
+     * The function that will be used to convert a base64-encoded string to a byte array.
+     * @internal
+     */
+    base64Decoder?: __Decoder;
+    /**
+     * The function that will be used to convert binary data to a base64-encoded string.
+     * @internal
+     */
+    base64Encoder?: __Encoder;
+    /**
+     * The function that will be used to convert a UTF8-encoded string to a byte array.
+     * @internal
+     */
+    utf8Decoder?: __Decoder;
+    /**
+     * The function that will be used to convert binary data to a UTF-8 encoded string.
+     * @internal
+     */
+    utf8Encoder?: __Encoder;
+    /**
+     * The runtime environment.
+     * @internal
+     */
+    runtime?: string;
+    /**
+     * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+     * trait of an operation.
+     */
+    disableHostPrefix?: boolean;
+    /**
+     * Unique service identifier.
+     * @internal
+     */
+    serviceId?: string;
+    /**
+     * The AWS region to which this client will send requests
+     */
+    region?: string | __Provider<string>;
+    /**
+     * Value for how many times a request will be made at most in case of retry.
+     */
+    maxAttempts?: number | __Provider<number>;
+    /**
+     * Specifies provider for retry algorithm to use.
+     * @internal
+     */
+    retryModeProvider?: __Provider<string>;
+    /**
+     * Optional logger for logging debug/info/warn/error.
+     */
+    logger?: __Logger;
+    /**
+     * Default credentials provider; Not available in browser runtime.
+     * @internal
+     */
+    credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
+    /**
+     * Fetch related hostname, signing name or signing region with given region.
+     * @internal
+     */
+    regionInfoProvider?: RegionInfoProvider;
+    /**
+     * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
+     * @internal
+     */
+    defaultUserAgentProvider?: Provider<__UserAgent>;
+}
+declare type ComputeOptimizerClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> & ClientDefaults & RegionInputConfig & EndpointsInputConfig & RetryInputConfig & HostHeaderInputConfig & AwsAuthInputConfig & UserAgentInputConfig;
+/**
+ * The configuration interface of ComputeOptimizerClient class constructor that set the region, credentials and other options.
+ */
+export interface ComputeOptimizerClientConfig extends ComputeOptimizerClientConfigType {
+}
+declare type ComputeOptimizerClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> & Required<ClientDefaults> & RegionResolvedConfig & EndpointsResolvedConfig & RetryResolvedConfig & HostHeaderResolvedConfig & AwsAuthResolvedConfig & UserAgentResolvedConfig;
+/**
+ * The resolved configuration interface of ComputeOptimizerClient class. This is resolved and normalized from the {@link ComputeOptimizerClientConfig | constructor configuration interface}.
+ */
+export interface ComputeOptimizerClientResolvedConfig extends ComputeOptimizerClientResolvedConfigType {
+}
+/**
+ * <p>AWS Compute Optimizer is a service that analyzes the configuration and utilization
+ *             metrics of your AWS compute resources, such as EC2 instances, Auto Scaling groups, AWS Lambda
+ *             functions, and Amazon EBS volumes. It reports whether your resources are optimal, and
+ *             generates optimization recommendations to reduce the cost and improve the performance of
+ *             your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected
+ *             utilization metric data for the recommendations, which you can use to evaluate which
+ *             recommendation provides the best price-performance trade-off. The analysis of your usage
+ *             patterns can help you decide when to move or resize your running resources, and still
+ *             meet your performance and capacity requirements. For more information about Compute Optimizer,
+ *             including the required permissions to use the service, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/">AWS Compute Optimizer User
+ *             Guide</a>.</p>
+ */
+export declare class ComputeOptimizerClient extends __Client<__HttpHandlerOptions, ServiceInputTypes, ServiceOutputTypes, ComputeOptimizerClientResolvedConfig> {
+    /**
+     * The resolved configuration of ComputeOptimizerClient class. This is resolved and normalized from the {@link ComputeOptimizerClientConfig | constructor configuration interface}.
+     */
+    readonly config: ComputeOptimizerClientResolvedConfig;
+    constructor(configuration: ComputeOptimizerClientConfig);
+    /**
+     * Destroy underlying resources, like sockets. It's usually not necessary to do this.
+     * However in Node.js, it's best to explicitly shut down the client's agent when it is no longer needed.
+     * Otherwise, sockets might stay open for quite a long time before the server terminates them.
+     */
+    destroy(): void;
+}
+export {};

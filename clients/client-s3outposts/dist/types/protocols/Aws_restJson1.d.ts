@@ -1,0 +1,11 @@
+import { CreateEndpointCommandInput, CreateEndpointCommandOutput } from "../commands/CreateEndpointCommand";
+import { DeleteEndpointCommandInput, DeleteEndpointCommandOutput } from "../commands/DeleteEndpointCommand";
+import { ListEndpointsCommandInput, ListEndpointsCommandOutput } from "../commands/ListEndpointsCommand";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
+import { SerdeContext as __SerdeContext } from "@aws-sdk/types";
+export declare const serializeAws_restJson1CreateEndpointCommand: (input: CreateEndpointCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1DeleteEndpointCommand: (input: DeleteEndpointCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1ListEndpointsCommand: (input: ListEndpointsCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const deserializeAws_restJson1CreateEndpointCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<CreateEndpointCommandOutput>;
+export declare const deserializeAws_restJson1DeleteEndpointCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<DeleteEndpointCommandOutput>;
+export declare const deserializeAws_restJson1ListEndpointsCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<ListEndpointsCommandOutput>;

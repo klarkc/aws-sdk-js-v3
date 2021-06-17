@@ -1,0 +1,82 @@
+import { __extends } from "tslib";
+import { ListTagsForResourceRequest, ListTagsForResourceResponse } from "../models/models_0";
+import { deserializeAws_json1_1ListTagsForResourceCommand, serializeAws_json1_1ListTagsForResourceCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Lists tags that are attached to the specified resource.</p>
+ *         <p>You can attach tags to the following resources in AWS Organizations.</p>
+ *         <ul>
+ *             <li>
+ *                 <p>AWS account</p>
+ *             </li>
+ *             <li>
+ *                 <p>Organization root</p>
+ *             </li>
+ *             <li>
+ *                 <p>Organizational unit (OU)</p>
+ *             </li>
+ *             <li>
+ *                 <p>Policy (any type)</p>
+ *             </li>
+ *          </ul>
+ *         <p>This operation can be called only from the organization's
+ * management account or by a member account that is a delegated administrator for an AWS service.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { OrganizationsClient, ListTagsForResourceCommand } from "@aws-sdk/client-organizations"; // ES Modules import
+ * // const { OrganizationsClient, ListTagsForResourceCommand } = require("@aws-sdk/client-organizations"); // CommonJS import
+ * const client = new OrganizationsClient(config);
+ * const command = new ListTagsForResourceCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link ListTagsForResourceCommandInput} for command's `input` shape.
+ * @see {@link ListTagsForResourceCommandOutput} for command's `response` shape.
+ * @see {@link OrganizationsClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var ListTagsForResourceCommand = /** @class */ (function (_super) {
+    __extends(ListTagsForResourceCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function ListTagsForResourceCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    ListTagsForResourceCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "OrganizationsClient";
+        var commandName = "ListTagsForResourceCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: ListTagsForResourceRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: ListTagsForResourceResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    ListTagsForResourceCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1ListTagsForResourceCommand(input, context);
+    };
+    ListTagsForResourceCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1ListTagsForResourceCommand(output, context);
+    };
+    return ListTagsForResourceCommand;
+}($Command));
+export { ListTagsForResourceCommand };
+//# sourceMappingURL=ListTagsForResourceCommand.js.map

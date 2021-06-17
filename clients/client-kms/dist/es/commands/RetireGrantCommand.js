@@ -1,0 +1,117 @@
+import { __extends } from "tslib";
+import { RetireGrantRequest } from "../models/models_0";
+import { deserializeAws_json1_1RetireGrantCommand, serializeAws_json1_1RetireGrantCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Retires a grant. To clean up, you can retire a grant when you're done using it. You should
+ *       revoke a grant when you intend to actively deny operations that depend on it. The following
+ *       are permitted to call this API:</p>
+ *          <ul>
+ *             <li>
+ *                <p>The AWS account (root user) under which the grant was created</p>
+ *             </li>
+ *             <li>
+ *                <p>The <code>RetiringPrincipal</code>, if present in the grant</p>
+ *             </li>
+ *             <li>
+ *                <p>The <code>GranteePrincipal</code>, if <code>RetireGrant</code> is an operation
+ *           specified in the grant</p>
+ *             </li>
+ *          </ul>
+ *          <p>You must identify the grant to retire by its grant token or by a combination of the grant
+ *       ID and the Amazon Resource Name (ARN) of the customer master key (CMK). A grant token is a
+ *       unique variable-length base64-encoded string. A grant ID is a 64 character unique identifier
+ *       of a grant. The <a>CreateGrant</a> operation returns both.</p>
+ *
+ *          <p>
+ *             <b>Cross-account use</b>: Yes. You can retire a grant on a CMK
+ *       in a different AWS account.</p>
+ *          <p>
+ *             <b>Required permissions:</b>: Permission to retire a grant is
+ *       specified in the grant. You cannot control access to this operation in a policy. For more
+ *       information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html">Using
+ *         grants</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>
+ *          <p>
+ *             <b>Related operations:</b>
+ *          </p>
+ *          <ul>
+ *             <li>
+ *                <p>
+ *                   <a>CreateGrant</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a>ListGrants</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a>ListRetirableGrants</a>
+ *                </p>
+ *             </li>
+ *             <li>
+ *                <p>
+ *                   <a>RevokeGrant</a>
+ *                </p>
+ *             </li>
+ *          </ul>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { KMSClient, RetireGrantCommand } from "@aws-sdk/client-kms"; // ES Modules import
+ * // const { KMSClient, RetireGrantCommand } = require("@aws-sdk/client-kms"); // CommonJS import
+ * const client = new KMSClient(config);
+ * const command = new RetireGrantCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link RetireGrantCommandInput} for command's `input` shape.
+ * @see {@link RetireGrantCommandOutput} for command's `response` shape.
+ * @see {@link KMSClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var RetireGrantCommand = /** @class */ (function (_super) {
+    __extends(RetireGrantCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function RetireGrantCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    RetireGrantCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "KMSClient";
+        var commandName = "RetireGrantCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: RetireGrantRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: function (output) { return output; },
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    RetireGrantCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1RetireGrantCommand(input, context);
+    };
+    RetireGrantCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1RetireGrantCommand(output, context);
+    };
+    return RetireGrantCommand;
+}($Command));
+export { RetireGrantCommand };
+//# sourceMappingURL=RetireGrantCommand.js.map

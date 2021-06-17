@@ -1,0 +1,65 @@
+import { __extends } from "tslib";
+import { DescribeEndpointTypesMessage, DescribeEndpointTypesResponse } from "../models/models_0";
+import { deserializeAws_json1_1DescribeEndpointTypesCommand, serializeAws_json1_1DescribeEndpointTypesCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Returns information about the type of endpoints available.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DatabaseMigrationServiceClient, DescribeEndpointTypesCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
+ * // const { DatabaseMigrationServiceClient, DescribeEndpointTypesCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * const client = new DatabaseMigrationServiceClient(config);
+ * const command = new DescribeEndpointTypesCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DescribeEndpointTypesCommandInput} for command's `input` shape.
+ * @see {@link DescribeEndpointTypesCommandOutput} for command's `response` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var DescribeEndpointTypesCommand = /** @class */ (function (_super) {
+    __extends(DescribeEndpointTypesCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function DescribeEndpointTypesCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    DescribeEndpointTypesCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "DatabaseMigrationServiceClient";
+        var commandName = "DescribeEndpointTypesCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: DescribeEndpointTypesMessage.filterSensitiveLog,
+            outputFilterSensitiveLog: DescribeEndpointTypesResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    DescribeEndpointTypesCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1DescribeEndpointTypesCommand(input, context);
+    };
+    DescribeEndpointTypesCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1DescribeEndpointTypesCommand(output, context);
+    };
+    return DescribeEndpointTypesCommand;
+}($Command));
+export { DescribeEndpointTypesCommand };
+//# sourceMappingURL=DescribeEndpointTypesCommand.js.map

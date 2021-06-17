@@ -1,0 +1,64 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ExportBundleCommand = void 0;
+const models_0_1 = require("../models/models_0");
+const Aws_restJson1_1 = require("../protocols/Aws_restJson1");
+const middleware_serde_1 = require("@aws-sdk/middleware-serde");
+const smithy_client_1 = require("@aws-sdk/smithy-client");
+/**
+ * <p>
+ *             Generates customized software development kit (SDK) and or tool packages
+ *             used to integrate mobile web or mobile app clients with backend AWS resources.
+ *         </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MobileClient, ExportBundleCommand } from "@aws-sdk/client-mobile"; // ES Modules import
+ * // const { MobileClient, ExportBundleCommand } = require("@aws-sdk/client-mobile"); // CommonJS import
+ * const client = new MobileClient(config);
+ * const command = new ExportBundleCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link ExportBundleCommandInput} for command's `input` shape.
+ * @see {@link ExportBundleCommandOutput} for command's `response` shape.
+ * @see {@link MobileClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+class ExportBundleCommand extends smithy_client_1.Command {
+    // Start section: command_properties
+    // End section: command_properties
+    constructor(input) {
+        // Start section: command_constructor
+        super();
+        this.input = input;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack, configuration, options) {
+        this.middlewareStack.use(middleware_serde_1.getSerdePlugin(configuration, this.serialize, this.deserialize));
+        const stack = clientStack.concat(this.middlewareStack);
+        const { logger } = configuration;
+        const clientName = "MobileClient";
+        const commandName = "ExportBundleCommand";
+        const handlerExecutionContext = {
+            logger,
+            clientName,
+            commandName,
+            inputFilterSensitiveLog: models_0_1.ExportBundleRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: models_0_1.ExportBundleResult.filterSensitiveLog,
+        };
+        const { requestHandler } = configuration;
+        return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
+    }
+    serialize(input, context) {
+        return Aws_restJson1_1.serializeAws_restJson1ExportBundleCommand(input, context);
+    }
+    deserialize(output, context) {
+        return Aws_restJson1_1.deserializeAws_restJson1ExportBundleCommand(output, context);
+    }
+}
+exports.ExportBundleCommand = ExportBundleCommand;
+//# sourceMappingURL=ExportBundleCommand.js.map

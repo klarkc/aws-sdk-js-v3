@@ -1,0 +1,455 @@
+import { SmithyException as __SmithyException } from "@aws-sdk/smithy-client";
+import { MetadataBearer as $MetadataBearer } from "@aws-sdk/types";
+/**
+ * <p>
+ *             The memory information of an Elastic Inference Accelerator type.
+ *         </p>
+ */
+export interface MemoryInfo {
+    /**
+     * <p>
+     *             The size in mebibytes of the Elastic Inference Accelerator type.
+     *         </p>
+     */
+    sizeInMiB?: number;
+}
+export declare namespace MemoryInfo {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: MemoryInfo) => any;
+}
+/**
+ * <p>
+ *             A throughput entry for an Elastic Inference Accelerator type.
+ *         </p>
+ */
+export interface KeyValuePair {
+    /**
+     * <p>
+     *             The throughput value of the Elastic Inference Accelerator type. It can assume the following values:
+     *             TFLOPS16bit: the throughput expressed in 16bit TeraFLOPS.
+     *             TFLOPS32bit: the throughput expressed in 32bit TeraFLOPS.
+     *         </p>
+     */
+    key?: string;
+    /**
+     * <p>
+     *             The throughput value of the Elastic Inference Accelerator type.
+     *         </p>
+     */
+    value?: number;
+}
+export declare namespace KeyValuePair {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: KeyValuePair) => any;
+}
+/**
+ * <p>
+ *             The details of an Elastic Inference Accelerator type.
+ *         </p>
+ */
+export interface AcceleratorType {
+    /**
+     * <p>
+     *             The name of the Elastic Inference Accelerator type.
+     *         </p>
+     */
+    acceleratorTypeName?: string;
+    /**
+     * <p>
+     *             The memory information of the Elastic Inference Accelerator type.
+     *         </p>
+     */
+    memoryInfo?: MemoryInfo;
+    /**
+     * <p>
+     *             The throughput information of the Elastic Inference Accelerator type.
+     *         </p>
+     */
+    throughputInfo?: KeyValuePair[];
+}
+export declare namespace AcceleratorType {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: AcceleratorType) => any;
+}
+export declare type LocationType = "availability-zone" | "availability-zone-id" | "region";
+/**
+ * <p>
+ *             The offering for an Elastic Inference Accelerator type.
+ *         </p>
+ */
+export interface AcceleratorTypeOffering {
+    /**
+     * <p>
+     *             The name of the Elastic Inference Accelerator type.
+     *         </p>
+     */
+    acceleratorType?: string;
+    /**
+     * <p>
+     *             The location type for the offering. It can assume the following values:
+     *             region: defines that the offering is at the regional level.
+     *             availability-zone: defines that the offering is at the availability zone level.
+     *             availability-zone-id: defines that the offering is at the availability zone level, defined by the availability zone id.
+     *         </p>
+     */
+    locationType?: LocationType | string;
+    /**
+     * <p>
+     *             The location for the offering.
+     *             It will return either the region, availability zone or availability zone id for the offering depending on the locationType value.
+     *         </p>
+     */
+    location?: string;
+}
+export declare namespace AcceleratorTypeOffering {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: AcceleratorTypeOffering) => any;
+}
+/**
+ * <p>
+ *             Raised when a malformed input has been provided to the API.
+ *         </p>
+ */
+export interface BadRequestException extends __SmithyException, $MetadataBearer {
+    name: "BadRequestException";
+    $fault: "client";
+    message?: string;
+}
+export declare namespace BadRequestException {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: BadRequestException) => any;
+}
+export interface DescribeAcceleratorOfferingsRequest {
+    /**
+     * <p>
+     *             The location type that you want to describe accelerator type offerings for. It can assume the following values:
+     *             region: will return the accelerator type offering at the regional level.
+     *             availability-zone: will return the accelerator type offering at the availability zone level.
+     *             availability-zone-id: will return the accelerator type offering at the availability zone level returning the availability zone id.
+     *         </p>
+     */
+    locationType: LocationType | string | undefined;
+    /**
+     * <p>
+     *             The list of accelerator types to describe.
+     *         </p>
+     */
+    acceleratorTypes?: string[];
+}
+export declare namespace DescribeAcceleratorOfferingsRequest {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: DescribeAcceleratorOfferingsRequest) => any;
+}
+export interface DescribeAcceleratorOfferingsResponse {
+    /**
+     * <p>
+     *             The list of accelerator type offerings for a specific location.
+     *         </p>
+     */
+    acceleratorTypeOfferings?: AcceleratorTypeOffering[];
+}
+export declare namespace DescribeAcceleratorOfferingsResponse {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: DescribeAcceleratorOfferingsResponse) => any;
+}
+/**
+ * <p>
+ *             Raised when an unexpected error occurred during request processing.
+ *         </p>
+ */
+export interface InternalServerException extends __SmithyException, $MetadataBearer {
+    name: "InternalServerException";
+    $fault: "server";
+    message?: string;
+}
+export declare namespace InternalServerException {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: InternalServerException) => any;
+}
+/**
+ * <p>
+ *             Raised when the requested resource cannot be found.
+ *         </p>
+ */
+export interface ResourceNotFoundException extends __SmithyException, $MetadataBearer {
+    name: "ResourceNotFoundException";
+    $fault: "client";
+    message?: string;
+}
+export declare namespace ResourceNotFoundException {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: ResourceNotFoundException) => any;
+}
+/**
+ * <p>
+ *             A filter expression for the Elastic Inference Accelerator list.
+ *         </p>
+ */
+export interface Filter {
+    /**
+     * <p>
+     *             The filter name for the Elastic Inference Accelerator list. It can assume the following values:
+     *             accelerator-type: the type of Elastic Inference Accelerator to filter for.
+     *             instance-id: an EC2 instance id to filter for.
+     *         </p>
+     */
+    name?: string;
+    /**
+     * <p>
+     *             The values for the filter of the Elastic Inference Accelerator list.
+     *         </p>
+     */
+    values?: string[];
+}
+export declare namespace Filter {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: Filter) => any;
+}
+export interface DescribeAcceleratorsRequest {
+    /**
+     * <p>
+     *             The IDs of the accelerators to describe.
+     *         </p>
+     */
+    acceleratorIds?: string[];
+    /**
+     * <p>
+     *             One or more filters. Filter names and values are case-sensitive. Valid filter names are:
+     *             accelerator-types: can provide a list of accelerator type names to filter for.
+     *             instance-id: can provide a list of EC2 instance ids to filter for.
+     *         </p>
+     */
+    filters?: Filter[];
+    /**
+     * <p>
+     *             The total number of items to return in the command's output. If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
+     *             To resume pagination, provide the NextToken value in the starting-token argument of a subsequent command.
+     *             Do not use the NextToken response element directly outside of the AWS CLI.
+     *         </p>
+     */
+    maxResults?: number;
+    /**
+     * <p>
+     *             A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     *         </p>
+     */
+    nextToken?: string;
+}
+export declare namespace DescribeAcceleratorsRequest {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: DescribeAcceleratorsRequest) => any;
+}
+/**
+ * <p>
+ *             The health details of an Elastic Inference Accelerator.
+ *         </p>
+ */
+export interface ElasticInferenceAcceleratorHealth {
+    /**
+     * <p>
+     *             The health status of the Elastic Inference Accelerator.
+     *         </p>
+     */
+    status?: string;
+}
+export declare namespace ElasticInferenceAcceleratorHealth {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: ElasticInferenceAcceleratorHealth) => any;
+}
+/**
+ * <p>
+ *             The details of an Elastic Inference Accelerator.
+ *         </p>
+ */
+export interface ElasticInferenceAccelerator {
+    /**
+     * <p>
+     *             The health of the Elastic Inference Accelerator.
+     *         </p>
+     */
+    acceleratorHealth?: ElasticInferenceAcceleratorHealth;
+    /**
+     * <p>
+     *             The type of the Elastic Inference Accelerator.
+     *         </p>
+     */
+    acceleratorType?: string;
+    /**
+     * <p>
+     *             The ID of the Elastic Inference Accelerator.
+     *         </p>
+     */
+    acceleratorId?: string;
+    /**
+     * <p>
+     *             The availability zone where the Elastic Inference Accelerator is present.
+     *         </p>
+     */
+    availabilityZone?: string;
+    /**
+     * <p>
+     *             The ARN of the resource that the Elastic Inference Accelerator is attached to.
+     *         </p>
+     */
+    attachedResource?: string;
+}
+export declare namespace ElasticInferenceAccelerator {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: ElasticInferenceAccelerator) => any;
+}
+export interface DescribeAcceleratorsResponse {
+    /**
+     * <p>
+     *             The details of the Elastic Inference Accelerators.
+     *         </p>
+     */
+    acceleratorSet?: ElasticInferenceAccelerator[];
+    /**
+     * <p>
+     *             A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     *         </p>
+     */
+    nextToken?: string;
+}
+export declare namespace DescribeAcceleratorsResponse {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: DescribeAcceleratorsResponse) => any;
+}
+export interface DescribeAcceleratorTypesRequest {
+}
+export declare namespace DescribeAcceleratorTypesRequest {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: DescribeAcceleratorTypesRequest) => any;
+}
+export interface DescribeAcceleratorTypesResponse {
+    /**
+     * <p>
+     *             The available accelerator types.
+     *         </p>
+     */
+    acceleratorTypes?: AcceleratorType[];
+}
+export declare namespace DescribeAcceleratorTypesResponse {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: DescribeAcceleratorTypesResponse) => any;
+}
+export interface ListTagsForResourceRequest {
+    /**
+     * <p>
+     *             The ARN of the Elastic Inference Accelerator to list the tags for.
+     *         </p>
+     */
+    resourceArn: string | undefined;
+}
+export declare namespace ListTagsForResourceRequest {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: ListTagsForResourceRequest) => any;
+}
+export interface ListTagsForResourceResult {
+    /**
+     * <p>
+     *             The tags of the Elastic Inference Accelerator.
+     *         </p>
+     */
+    tags?: {
+        [key: string]: string;
+    };
+}
+export declare namespace ListTagsForResourceResult {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: ListTagsForResourceResult) => any;
+}
+export interface TagResourceRequest {
+    /**
+     * <p>
+     *             The ARN of the Elastic Inference Accelerator to tag.
+     *         </p>
+     */
+    resourceArn: string | undefined;
+    /**
+     * <p>
+     *             The tags to add to the Elastic Inference Accelerator.
+     *         </p>
+     */
+    tags: {
+        [key: string]: string;
+    } | undefined;
+}
+export declare namespace TagResourceRequest {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: TagResourceRequest) => any;
+}
+export interface TagResourceResult {
+}
+export declare namespace TagResourceResult {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: TagResourceResult) => any;
+}
+export interface UntagResourceRequest {
+    /**
+     * <p>
+     *             The ARN of the Elastic Inference Accelerator to untag.
+     *         </p>
+     */
+    resourceArn: string | undefined;
+    /**
+     * <p>
+     *             The list of tags to remove from the Elastic Inference Accelerator.
+     *         </p>
+     */
+    tagKeys: string[] | undefined;
+}
+export declare namespace UntagResourceRequest {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: UntagResourceRequest) => any;
+}
+export interface UntagResourceResult {
+}
+export declare namespace UntagResourceResult {
+    /**
+     * @internal
+     */
+    const filterSensitiveLog: (obj: UntagResourceResult) => any;
+}

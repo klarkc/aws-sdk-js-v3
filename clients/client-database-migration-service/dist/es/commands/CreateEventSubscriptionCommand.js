@@ -1,0 +1,80 @@
+import { __extends } from "tslib";
+import { CreateEventSubscriptionMessage, CreateEventSubscriptionResponse } from "../models/models_0";
+import { deserializeAws_json1_1CreateEventSubscriptionCommand, serializeAws_json1_1CreateEventSubscriptionCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p> Creates an AWS DMS event notification subscription. </p>
+ *          <p>You can specify the type of source (<code>SourceType</code>) you want to be notified of,
+ *          provide a list of AWS DMS source IDs (<code>SourceIds</code>) that triggers the events, and
+ *          provide a list of event categories (<code>EventCategories</code>) for events you want to be
+ *          notified of. If you specify both the <code>SourceType</code> and <code>SourceIds</code>,
+ *          such as <code>SourceType = replication-instance</code> and <code>SourceIdentifier =
+ *             my-replinstance</code>, you will be notified of all the replication instance events for
+ *          the specified source. If you specify a <code>SourceType</code> but don't specify a
+ *             <code>SourceIdentifier</code>, you receive notice of the events for that source type for
+ *          all your AWS DMS sources. If you don't specify either <code>SourceType</code> nor
+ *             <code>SourceIdentifier</code>, you will be notified of events generated from all AWS DMS
+ *          sources belonging to your customer account.</p>
+ *          <p>For more information about AWS DMS events, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and
+ *             Notifications</a> in the <i>AWS Database Migration Service User
+ *             Guide.</i>
+ *          </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { DatabaseMigrationServiceClient, CreateEventSubscriptionCommand } from "@aws-sdk/client-database-migration-service"; // ES Modules import
+ * // const { DatabaseMigrationServiceClient, CreateEventSubscriptionCommand } = require("@aws-sdk/client-database-migration-service"); // CommonJS import
+ * const client = new DatabaseMigrationServiceClient(config);
+ * const command = new CreateEventSubscriptionCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link CreateEventSubscriptionCommandInput} for command's `input` shape.
+ * @see {@link CreateEventSubscriptionCommandOutput} for command's `response` shape.
+ * @see {@link DatabaseMigrationServiceClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var CreateEventSubscriptionCommand = /** @class */ (function (_super) {
+    __extends(CreateEventSubscriptionCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function CreateEventSubscriptionCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    CreateEventSubscriptionCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "DatabaseMigrationServiceClient";
+        var commandName = "CreateEventSubscriptionCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: CreateEventSubscriptionMessage.filterSensitiveLog,
+            outputFilterSensitiveLog: CreateEventSubscriptionResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    CreateEventSubscriptionCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1CreateEventSubscriptionCommand(input, context);
+    };
+    CreateEventSubscriptionCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1CreateEventSubscriptionCommand(output, context);
+    };
+    return CreateEventSubscriptionCommand;
+}($Command));
+export { CreateEventSubscriptionCommand };
+//# sourceMappingURL=CreateEventSubscriptionCommand.js.map

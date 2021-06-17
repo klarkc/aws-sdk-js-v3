@@ -1,0 +1,67 @@
+import { __extends } from "tslib";
+import { DescribeMetricSetRequest, DescribeMetricSetResponse } from "../models/models_0";
+import { deserializeAws_restJson1DescribeMetricSetCommand, serializeAws_restJson1DescribeMetricSetCommand, } from "../protocols/Aws_restJson1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Describes a dataset.</p>
+ *          <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource
+ *       immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { LookoutMetricsClient, DescribeMetricSetCommand } from "@aws-sdk/client-lookoutmetrics"; // ES Modules import
+ * // const { LookoutMetricsClient, DescribeMetricSetCommand } = require("@aws-sdk/client-lookoutmetrics"); // CommonJS import
+ * const client = new LookoutMetricsClient(config);
+ * const command = new DescribeMetricSetCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DescribeMetricSetCommandInput} for command's `input` shape.
+ * @see {@link DescribeMetricSetCommandOutput} for command's `response` shape.
+ * @see {@link LookoutMetricsClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var DescribeMetricSetCommand = /** @class */ (function (_super) {
+    __extends(DescribeMetricSetCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function DescribeMetricSetCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    DescribeMetricSetCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "LookoutMetricsClient";
+        var commandName = "DescribeMetricSetCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: DescribeMetricSetRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: DescribeMetricSetResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    DescribeMetricSetCommand.prototype.serialize = function (input, context) {
+        return serializeAws_restJson1DescribeMetricSetCommand(input, context);
+    };
+    DescribeMetricSetCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_restJson1DescribeMetricSetCommand(output, context);
+    };
+    return DescribeMetricSetCommand;
+}($Command));
+export { DescribeMetricSetCommand };
+//# sourceMappingURL=DescribeMetricSetCommand.js.map

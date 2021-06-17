@@ -1,0 +1,65 @@
+import { __extends } from "tslib";
+import { DeleteArchiveRequest, DeleteArchiveResponse } from "../models/models_0";
+import { deserializeAws_json1_1DeleteArchiveCommand, serializeAws_json1_1DeleteArchiveCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Deletes the specified archive.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CloudWatchEventsClient, DeleteArchiveCommand } from "@aws-sdk/client-cloudwatch-events"; // ES Modules import
+ * // const { CloudWatchEventsClient, DeleteArchiveCommand } = require("@aws-sdk/client-cloudwatch-events"); // CommonJS import
+ * const client = new CloudWatchEventsClient(config);
+ * const command = new DeleteArchiveCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DeleteArchiveCommandInput} for command's `input` shape.
+ * @see {@link DeleteArchiveCommandOutput} for command's `response` shape.
+ * @see {@link CloudWatchEventsClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var DeleteArchiveCommand = /** @class */ (function (_super) {
+    __extends(DeleteArchiveCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function DeleteArchiveCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    DeleteArchiveCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "CloudWatchEventsClient";
+        var commandName = "DeleteArchiveCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: DeleteArchiveRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: DeleteArchiveResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    DeleteArchiveCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1DeleteArchiveCommand(input, context);
+    };
+    DeleteArchiveCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1DeleteArchiveCommand(output, context);
+    };
+    return DeleteArchiveCommand;
+}($Command));
+export { DeleteArchiveCommand };
+//# sourceMappingURL=DeleteArchiveCommand.js.map

@@ -1,0 +1,18 @@
+import { ParameterType } from "typedoc/dist/lib/utils";
+import { SdkIndexLinkClientPlugin } from "./sdk-index-link-client";
+/**
+ * @param pluginHost An instance of PluginHost.
+ */
+module.exports = function load(pluginHost) {
+    var application = pluginHost.owner;
+    // Core packages doc generator plugins.
+    application.options.addDeclaration({
+        name: "clientDocs",
+        help: 'The path pattern denotes the location of individual service client doc. "{{CLIENT}}" will be replaced with the ' +
+            "client name. For example: `path/{{CLIENT}}/docs` will target s3 docs at `path/client-s3/docs`",
+        defaultValue: "clients/{{CLIENT}}/docs",
+        type: ParameterType.String,
+    });
+    application.renderer.addComponent("SdkIndexLinkClientPlugin", new SdkIndexLinkClientPlugin(application.renderer));
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxFQUFFLGFBQWEsRUFBYyxNQUFNLHdCQUF3QixDQUFDO0FBRW5FLE9BQU8sRUFBRSx3QkFBd0IsRUFBRSxNQUFNLHlCQUF5QixDQUFDO0FBRW5FOztHQUVHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sR0FBRyxTQUFTLElBQUksQ0FBQyxVQUFzQjtJQUNuRCxJQUFNLFdBQVcsR0FBRyxVQUFVLENBQUMsS0FBSyxDQUFDO0lBRXJDLHVDQUF1QztJQUN2QyxXQUFXLENBQUMsT0FBTyxDQUFDLGNBQWMsQ0FBQztRQUNqQyxJQUFJLEVBQUUsWUFBWTtRQUNsQixJQUFJLEVBQ0YsaUhBQWlIO1lBQ2pILCtGQUErRjtRQUNqRyxZQUFZLEVBQUUseUJBQXlCO1FBQ3ZDLElBQUksRUFBRSxhQUFhLENBQUMsTUFBTTtLQUMzQixDQUFDLENBQUM7SUFDSCxXQUFXLENBQUMsUUFBUSxDQUFDLFlBQVksQ0FBQywwQkFBMEIsRUFBRSxJQUFJLHdCQUF3QixDQUFDLFdBQVcsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO0FBQ3BILENBQUMsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IFBhcmFtZXRlclR5cGUsIFBsdWdpbkhvc3QgfSBmcm9tIFwidHlwZWRvYy9kaXN0L2xpYi91dGlsc1wiO1xuXG5pbXBvcnQgeyBTZGtJbmRleExpbmtDbGllbnRQbHVnaW4gfSBmcm9tIFwiLi9zZGstaW5kZXgtbGluay1jbGllbnRcIjtcblxuLyoqXG4gKiBAcGFyYW0gcGx1Z2luSG9zdCBBbiBpbnN0YW5jZSBvZiBQbHVnaW5Ib3N0LlxuICovXG5tb2R1bGUuZXhwb3J0cyA9IGZ1bmN0aW9uIGxvYWQocGx1Z2luSG9zdDogUGx1Z2luSG9zdCkge1xuICBjb25zdCBhcHBsaWNhdGlvbiA9IHBsdWdpbkhvc3Qub3duZXI7XG5cbiAgLy8gQ29yZSBwYWNrYWdlcyBkb2MgZ2VuZXJhdG9yIHBsdWdpbnMuXG4gIGFwcGxpY2F0aW9uLm9wdGlvbnMuYWRkRGVjbGFyYXRpb24oe1xuICAgIG5hbWU6IFwiY2xpZW50RG9jc1wiLFxuICAgIGhlbHA6XG4gICAgICAnVGhlIHBhdGggcGF0dGVybiBkZW5vdGVzIHRoZSBsb2NhdGlvbiBvZiBpbmRpdmlkdWFsIHNlcnZpY2UgY2xpZW50IGRvYy4gXCJ7e0NMSUVOVH19XCIgd2lsbCBiZSByZXBsYWNlZCB3aXRoIHRoZSAnICtcbiAgICAgIFwiY2xpZW50IG5hbWUuIEZvciBleGFtcGxlOiBgcGF0aC97e0NMSUVOVH19L2RvY3NgIHdpbGwgdGFyZ2V0IHMzIGRvY3MgYXQgYHBhdGgvY2xpZW50LXMzL2RvY3NgXCIsXG4gICAgZGVmYXVsdFZhbHVlOiBcImNsaWVudHMve3tDTElFTlR9fS9kb2NzXCIsXG4gICAgdHlwZTogUGFyYW1ldGVyVHlwZS5TdHJpbmcsXG4gIH0pO1xuICBhcHBsaWNhdGlvbi5yZW5kZXJlci5hZGRDb21wb25lbnQoXCJTZGtJbmRleExpbmtDbGllbnRQbHVnaW5cIiwgbmV3IFNka0luZGV4TGlua0NsaWVudFBsdWdpbihhcHBsaWNhdGlvbi5yZW5kZXJlcikpO1xufTtcbiJdfQ==

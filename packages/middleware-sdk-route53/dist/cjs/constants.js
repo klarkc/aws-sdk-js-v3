@@ -1,0 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IDENTIFIER_PREFIX_PATTERN = void 0;
+exports.IDENTIFIER_PREFIX_PATTERN = /^\/(hostedzone|change|delegationset)\//;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uc3RhbnRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2NvbnN0YW50cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBYSxRQUFBLHlCQUF5QixHQUFHLHdDQUF3QyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IElERU5USUZJRVJfUFJFRklYX1BBVFRFUk4gPSAvXlxcLyhob3N0ZWR6b25lfGNoYW5nZXxkZWxlZ2F0aW9uc2V0KVxcLy87XG4iXX0=

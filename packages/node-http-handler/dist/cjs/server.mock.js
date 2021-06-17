@@ -1,0 +1,54 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createMockHttp2Server = exports.createMockHttpServer = exports.createMockHttpsServer = exports.createContinueResponseFunction = exports.createResponseFunction = void 0;
+const fs_1 = require("fs");
+const http_1 = require("http");
+const http2_1 = require("http2");
+const https_1 = require("https");
+const path_1 = require("path");
+const stream_1 = require("stream");
+const fixturesDir = path_1.join(__dirname, "..", "fixtures");
+function createResponseFunction(httpResp) {
+    return function (request, response) {
+        response.statusCode = httpResp.statusCode;
+        for (const name of Object.keys(httpResp.headers)) {
+            const values = httpResp.headers[name];
+            response.setHeader(name, values);
+        }
+        if (httpResp.body instanceof stream_1.Readable) {
+            httpResp.body.pipe(response);
+        }
+        else {
+            response.end(httpResp.body);
+        }
+    };
+}
+exports.createResponseFunction = createResponseFunction;
+function createContinueResponseFunction(httpResp) {
+    return function (request, response) {
+        response.writeContinue();
+        setTimeout(() => {
+            createResponseFunction(httpResp)(request, response);
+        }, 100);
+    };
+}
+exports.createContinueResponseFunction = createContinueResponseFunction;
+function createMockHttpsServer() {
+    const server = https_1.createServer({
+        key: fs_1.readFileSync(path_1.join(fixturesDir, "test-server-key.pem")),
+        cert: fs_1.readFileSync(path_1.join(fixturesDir, "test-server-cert.pem")),
+    });
+    return server;
+}
+exports.createMockHttpsServer = createMockHttpsServer;
+function createMockHttpServer() {
+    const server = http_1.createServer();
+    return server;
+}
+exports.createMockHttpServer = createMockHttpServer;
+function createMockHttp2Server() {
+    const server = http2_1.createServer();
+    return server;
+}
+exports.createMockHttp2Server = createMockHttp2Server;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VydmVyLm1vY2suanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvc2VydmVyLm1vY2sudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQ0EsMkJBQWtDO0FBQ2xDLCtCQUErRztBQUMvRyxpQ0FBdUU7QUFDdkUsaUNBQWlGO0FBQ2pGLCtCQUE0QjtBQUM1QixtQ0FBa0M7QUFFbEMsTUFBTSxXQUFXLEdBQUcsV0FBSSxDQUFDLFNBQVMsRUFBRSxJQUFJLEVBQUUsVUFBVSxDQUFDLENBQUM7QUFFdEQsU0FBZ0Isc0JBQXNCLENBQUMsUUFBc0I7SUFDM0QsT0FBTyxVQUFVLE9BQXdCLEVBQUUsUUFBd0I7UUFDakUsUUFBUSxDQUFDLFVBQVUsR0FBRyxRQUFRLENBQUMsVUFBVSxDQUFDO1FBQzFDLEtBQUssTUFBTSxJQUFJLElBQUksTUFBTSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLEVBQUU7WUFDaEQsTUFBTSxNQUFNLEdBQUcsUUFBUSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUN0QyxRQUFRLENBQUMsU0FBUyxDQUFDLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQztTQUNsQztRQUNELElBQUksUUFBUSxDQUFDLElBQUksWUFBWSxpQkFBUSxFQUFFO1lBQ3JDLFFBQVEsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1NBQzlCO2FBQU07WUFDTCxRQUFRLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUM3QjtJQUNILENBQUMsQ0FBQztBQUNKLENBQUM7QUFiRCx3REFhQztBQUVELFNBQWdCLDhCQUE4QixDQUFDLFFBQXNCO0lBQ25FLE9BQU8sVUFBVSxPQUF3QixFQUFFLFFBQXdCO1FBQ2pFLFFBQVEsQ0FBQyxhQUFhLEVBQUUsQ0FBQztRQUN6QixVQUFVLENBQUMsR0FBRyxFQUFFO1lBQ2Qsc0JBQXNCLENBQUMsUUFBUSxDQUFDLENBQUMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBQ3RELENBQUMsRUFBRSxHQUFHLENBQUMsQ0FBQztJQUNWLENBQUMsQ0FBQztBQUNKLENBQUM7QUFQRCx3RUFPQztBQUVELFNBQWdCLHFCQUFxQjtJQUNuQyxNQUFNLE1BQU0sR0FBRyxvQkFBaUIsQ0FBQztRQUMvQixHQUFHLEVBQUUsaUJBQVksQ0FBQyxXQUFJLENBQUMsV0FBVyxFQUFFLHFCQUFxQixDQUFDLENBQUM7UUFDM0QsSUFBSSxFQUFFLGlCQUFZLENBQUMsV0FBSSxDQUFDLFdBQVcsRUFBRSxzQkFBc0IsQ0FBQyxDQUFDO0tBQzlELENBQUMsQ0FBQztJQUNILE9BQU8sTUFBTSxDQUFDO0FBQ2hCLENBQUM7QUFORCxzREFNQztBQUVELFNBQWdCLG9CQUFvQjtJQUNsQyxNQUFNLE1BQU0sR0FBRyxtQkFBZ0IsRUFBRSxDQUFDO0lBQ2xDLE9BQU8sTUFBTSxDQUFDO0FBQ2hCLENBQUM7QUFIRCxvREFHQztBQUVELFNBQWdCLHFCQUFxQjtJQUNuQyxNQUFNLE1BQU0sR0FBRyxvQkFBaUIsRUFBRSxDQUFDO0lBQ25DLE9BQU8sTUFBTSxDQUFDO0FBQ2hCLENBQUM7QUFIRCxzREFHQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEh0dHBSZXNwb25zZSB9IGZyb20gXCJAYXdzLXNkay90eXBlc1wiO1xuaW1wb3J0IHsgcmVhZEZpbGVTeW5jIH0gZnJvbSBcImZzXCI7XG5pbXBvcnQgeyBjcmVhdGVTZXJ2ZXIgYXMgY3JlYXRlSHR0cFNlcnZlciwgSW5jb21pbmdNZXNzYWdlLCBTZXJ2ZXIgYXMgSHR0cFNlcnZlciwgU2VydmVyUmVzcG9uc2UgfSBmcm9tIFwiaHR0cFwiO1xuaW1wb3J0IHsgY3JlYXRlU2VydmVyIGFzIGNyZWF0ZUh0dHAyU2VydmVyLCBIdHRwMlNlcnZlciB9IGZyb20gXCJodHRwMlwiO1xuaW1wb3J0IHsgY3JlYXRlU2VydmVyIGFzIGNyZWF0ZUh0dHBzU2VydmVyLCBTZXJ2ZXIgYXMgSHR0cHNTZXJ2ZXIgfSBmcm9tIFwiaHR0cHNcIjtcbmltcG9ydCB7IGpvaW4gfSBmcm9tIFwicGF0aFwiO1xuaW1wb3J0IHsgUmVhZGFibGUgfSBmcm9tIFwic3RyZWFtXCI7XG5cbmNvbnN0IGZpeHR1cmVzRGlyID0gam9pbihfX2Rpcm5hbWUsIFwiLi5cIiwgXCJmaXh0dXJlc1wiKTtcblxuZXhwb3J0IGZ1bmN0aW9uIGNyZWF0ZVJlc3BvbnNlRnVuY3Rpb24oaHR0cFJlc3A6IEh0dHBSZXNwb25zZSkge1xuICByZXR1cm4gZnVuY3Rpb24gKHJlcXVlc3Q6IEluY29taW5nTWVzc2FnZSwgcmVzcG9uc2U6IFNlcnZlclJlc3BvbnNlKSB7XG4gICAgcmVzcG9uc2Uuc3RhdHVzQ29kZSA9IGh0dHBSZXNwLnN0YXR1c0NvZGU7XG4gICAgZm9yIChjb25zdCBuYW1lIG9mIE9iamVjdC5rZXlzKGh0dHBSZXNwLmhlYWRlcnMpKSB7XG4gICAgICBjb25zdCB2YWx1ZXMgPSBodHRwUmVzcC5oZWFkZXJzW25hbWVdO1xuICAgICAgcmVzcG9uc2Uuc2V0SGVhZGVyKG5hbWUsIHZhbHVlcyk7XG4gICAgfVxuICAgIGlmIChodHRwUmVzcC5ib2R5IGluc3RhbmNlb2YgUmVhZGFibGUpIHtcbiAgICAgIGh0dHBSZXNwLmJvZHkucGlwZShyZXNwb25zZSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIHJlc3BvbnNlLmVuZChodHRwUmVzcC5ib2R5KTtcbiAgICB9XG4gIH07XG59XG5cbmV4cG9ydCBmdW5jdGlvbiBjcmVhdGVDb250aW51ZVJlc3BvbnNlRnVuY3Rpb24oaHR0cFJlc3A6IEh0dHBSZXNwb25zZSkge1xuICByZXR1cm4gZnVuY3Rpb24gKHJlcXVlc3Q6IEluY29taW5nTWVzc2FnZSwgcmVzcG9uc2U6IFNlcnZlclJlc3BvbnNlKSB7XG4gICAgcmVzcG9uc2Uud3JpdGVDb250aW51ZSgpO1xuICAgIHNldFRpbWVvdXQoKCkgPT4ge1xuICAgICAgY3JlYXRlUmVzcG9uc2VGdW5jdGlvbihodHRwUmVzcCkocmVxdWVzdCwgcmVzcG9uc2UpO1xuICAgIH0sIDEwMCk7XG4gIH07XG59XG5cbmV4cG9ydCBmdW5jdGlvbiBjcmVhdGVNb2NrSHR0cHNTZXJ2ZXIoKTogSHR0cHNTZXJ2ZXIge1xuICBjb25zdCBzZXJ2ZXIgPSBjcmVhdGVIdHRwc1NlcnZlcih7XG4gICAga2V5OiByZWFkRmlsZVN5bmMoam9pbihmaXh0dXJlc0RpciwgXCJ0ZXN0LXNlcnZlci1rZXkucGVtXCIpKSxcbiAgICBjZXJ0OiByZWFkRmlsZVN5bmMoam9pbihmaXh0dXJlc0RpciwgXCJ0ZXN0LXNlcnZlci1jZXJ0LnBlbVwiKSksXG4gIH0pO1xuICByZXR1cm4gc2VydmVyO1xufVxuXG5leHBvcnQgZnVuY3Rpb24gY3JlYXRlTW9ja0h0dHBTZXJ2ZXIoKTogSHR0cFNlcnZlciB7XG4gIGNvbnN0IHNlcnZlciA9IGNyZWF0ZUh0dHBTZXJ2ZXIoKTtcbiAgcmV0dXJuIHNlcnZlcjtcbn1cblxuZXhwb3J0IGZ1bmN0aW9uIGNyZWF0ZU1vY2tIdHRwMlNlcnZlcigpOiBIdHRwMlNlcnZlciB7XG4gIGNvbnN0IHNlcnZlciA9IGNyZWF0ZUh0dHAyU2VydmVyKCk7XG4gIHJldHVybiBzZXJ2ZXI7XG59XG4iXX0=

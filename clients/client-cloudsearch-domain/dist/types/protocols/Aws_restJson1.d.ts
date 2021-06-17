@@ -1,0 +1,11 @@
+import { SearchCommandInput, SearchCommandOutput } from "../commands/SearchCommand";
+import { SuggestCommandInput, SuggestCommandOutput } from "../commands/SuggestCommand";
+import { UploadDocumentsCommandInput, UploadDocumentsCommandOutput } from "../commands/UploadDocumentsCommand";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
+import { SerdeContext as __SerdeContext } from "@aws-sdk/types";
+export declare const serializeAws_restJson1SearchCommand: (input: SearchCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1SuggestCommand: (input: SuggestCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1UploadDocumentsCommand: (input: UploadDocumentsCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const deserializeAws_restJson1SearchCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<SearchCommandOutput>;
+export declare const deserializeAws_restJson1SuggestCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<SuggestCommandOutput>;
+export declare const deserializeAws_restJson1UploadDocumentsCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<UploadDocumentsCommandOutput>;

@@ -1,0 +1,61 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CreateMultiplexProgramCommand = void 0;
+const models_1_1 = require("../models/models_1");
+const Aws_restJson1_1 = require("../protocols/Aws_restJson1");
+const middleware_serde_1 = require("@aws-sdk/middleware-serde");
+const smithy_client_1 = require("@aws-sdk/smithy-client");
+/**
+ * Create a new program in the multiplex.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { MediaLiveClient, CreateMultiplexProgramCommand } from "@aws-sdk/client-medialive"; // ES Modules import
+ * // const { MediaLiveClient, CreateMultiplexProgramCommand } = require("@aws-sdk/client-medialive"); // CommonJS import
+ * const client = new MediaLiveClient(config);
+ * const command = new CreateMultiplexProgramCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link CreateMultiplexProgramCommandInput} for command's `input` shape.
+ * @see {@link CreateMultiplexProgramCommandOutput} for command's `response` shape.
+ * @see {@link MediaLiveClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+class CreateMultiplexProgramCommand extends smithy_client_1.Command {
+    // Start section: command_properties
+    // End section: command_properties
+    constructor(input) {
+        // Start section: command_constructor
+        super();
+        this.input = input;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack, configuration, options) {
+        this.middlewareStack.use(middleware_serde_1.getSerdePlugin(configuration, this.serialize, this.deserialize));
+        const stack = clientStack.concat(this.middlewareStack);
+        const { logger } = configuration;
+        const clientName = "MediaLiveClient";
+        const commandName = "CreateMultiplexProgramCommand";
+        const handlerExecutionContext = {
+            logger,
+            clientName,
+            commandName,
+            inputFilterSensitiveLog: models_1_1.CreateMultiplexProgramRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: models_1_1.CreateMultiplexProgramResponse.filterSensitiveLog,
+        };
+        const { requestHandler } = configuration;
+        return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
+    }
+    serialize(input, context) {
+        return Aws_restJson1_1.serializeAws_restJson1CreateMultiplexProgramCommand(input, context);
+    }
+    deserialize(output, context) {
+        return Aws_restJson1_1.deserializeAws_restJson1CreateMultiplexProgramCommand(output, context);
+    }
+}
+exports.CreateMultiplexProgramCommand = CreateMultiplexProgramCommand;
+//# sourceMappingURL=CreateMultiplexProgramCommand.js.map

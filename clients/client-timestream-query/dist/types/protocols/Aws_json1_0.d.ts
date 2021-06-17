@@ -1,0 +1,11 @@
+import { CancelQueryCommandInput, CancelQueryCommandOutput } from "../commands/CancelQueryCommand";
+import { DescribeEndpointsCommandInput, DescribeEndpointsCommandOutput } from "../commands/DescribeEndpointsCommand";
+import { QueryCommandInput, QueryCommandOutput } from "../commands/QueryCommand";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
+import { SerdeContext as __SerdeContext } from "@aws-sdk/types";
+export declare const serializeAws_json1_0CancelQueryCommand: (input: CancelQueryCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_json1_0DescribeEndpointsCommand: (input: DescribeEndpointsCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_json1_0QueryCommand: (input: QueryCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const deserializeAws_json1_0CancelQueryCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<CancelQueryCommandOutput>;
+export declare const deserializeAws_json1_0DescribeEndpointsCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<DescribeEndpointsCommandOutput>;
+export declare const deserializeAws_json1_0QueryCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<QueryCommandOutput>;

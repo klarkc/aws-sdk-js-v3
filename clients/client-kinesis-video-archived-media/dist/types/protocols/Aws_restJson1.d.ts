@@ -1,0 +1,17 @@
+import { GetClipCommandInput, GetClipCommandOutput } from "../commands/GetClipCommand";
+import { GetDASHStreamingSessionURLCommandInput, GetDASHStreamingSessionURLCommandOutput } from "../commands/GetDASHStreamingSessionURLCommand";
+import { GetHLSStreamingSessionURLCommandInput, GetHLSStreamingSessionURLCommandOutput } from "../commands/GetHLSStreamingSessionURLCommand";
+import { GetMediaForFragmentListCommandInput, GetMediaForFragmentListCommandOutput } from "../commands/GetMediaForFragmentListCommand";
+import { ListFragmentsCommandInput, ListFragmentsCommandOutput } from "../commands/ListFragmentsCommand";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
+import { SerdeContext as __SerdeContext } from "@aws-sdk/types";
+export declare const serializeAws_restJson1GetClipCommand: (input: GetClipCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1GetDASHStreamingSessionURLCommand: (input: GetDASHStreamingSessionURLCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1GetHLSStreamingSessionURLCommand: (input: GetHLSStreamingSessionURLCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1GetMediaForFragmentListCommand: (input: GetMediaForFragmentListCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1ListFragmentsCommand: (input: ListFragmentsCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const deserializeAws_restJson1GetClipCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<GetClipCommandOutput>;
+export declare const deserializeAws_restJson1GetDASHStreamingSessionURLCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<GetDASHStreamingSessionURLCommandOutput>;
+export declare const deserializeAws_restJson1GetHLSStreamingSessionURLCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<GetHLSStreamingSessionURLCommandOutput>;
+export declare const deserializeAws_restJson1GetMediaForFragmentListCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<GetMediaForFragmentListCommandOutput>;
+export declare const deserializeAws_restJson1ListFragmentsCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<ListFragmentsCommandOutput>;

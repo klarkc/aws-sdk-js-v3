@@ -1,0 +1,65 @@
+import { __extends } from "tslib";
+import { GetWirelessGatewayTaskDefinitionRequest, GetWirelessGatewayTaskDefinitionResponse } from "../models/models_0";
+import { deserializeAws_restJson1GetWirelessGatewayTaskDefinitionCommand, serializeAws_restJson1GetWirelessGatewayTaskDefinitionCommand, } from "../protocols/Aws_restJson1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Gets information about a wireless gateway task definition.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { IoTWirelessClient, GetWirelessGatewayTaskDefinitionCommand } from "@aws-sdk/client-iot-wireless"; // ES Modules import
+ * // const { IoTWirelessClient, GetWirelessGatewayTaskDefinitionCommand } = require("@aws-sdk/client-iot-wireless"); // CommonJS import
+ * const client = new IoTWirelessClient(config);
+ * const command = new GetWirelessGatewayTaskDefinitionCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link GetWirelessGatewayTaskDefinitionCommandInput} for command's `input` shape.
+ * @see {@link GetWirelessGatewayTaskDefinitionCommandOutput} for command's `response` shape.
+ * @see {@link IoTWirelessClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var GetWirelessGatewayTaskDefinitionCommand = /** @class */ (function (_super) {
+    __extends(GetWirelessGatewayTaskDefinitionCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function GetWirelessGatewayTaskDefinitionCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    GetWirelessGatewayTaskDefinitionCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "IoTWirelessClient";
+        var commandName = "GetWirelessGatewayTaskDefinitionCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: GetWirelessGatewayTaskDefinitionRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: GetWirelessGatewayTaskDefinitionResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    GetWirelessGatewayTaskDefinitionCommand.prototype.serialize = function (input, context) {
+        return serializeAws_restJson1GetWirelessGatewayTaskDefinitionCommand(input, context);
+    };
+    GetWirelessGatewayTaskDefinitionCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_restJson1GetWirelessGatewayTaskDefinitionCommand(output, context);
+    };
+    return GetWirelessGatewayTaskDefinitionCommand;
+}($Command));
+export { GetWirelessGatewayTaskDefinitionCommand };
+//# sourceMappingURL=GetWirelessGatewayTaskDefinitionCommand.js.map

@@ -1,0 +1,70 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GetAccountLimitCommand = void 0;
+const models_0_1 = require("../models/models_0");
+const Aws_restXml_1 = require("../protocols/Aws_restXml");
+const middleware_serde_1 = require("@aws-sdk/middleware-serde");
+const smithy_client_1 = require("@aws-sdk/smithy-client");
+/**
+ * <p>Gets the specified limit for the current account, for example, the maximum number of health checks that you
+ * 			can create using the account.</p>
+ * 		       <p>For the default limit, see <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html">Limits</a>
+ * 			in the <i>Amazon Route 53 Developer Guide</i>. To request a higher limit,
+ * 			<a href="https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-route53">open a case</a>.</p>
+ * 		       <note>
+ *             <p>You can also view account limits in AWS Trusted Advisor. Sign in to the AWS Management Console and open the Trusted Advisor console at
+ * 			<a href="https://console.aws.amazon.com/trustedadvisor">https://console.aws.amazon.com/trustedadvisor/</a>. Then choose
+ * 			<b>Service limits</b> in the navigation pane.</p>
+ * 		       </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { Route53Client, GetAccountLimitCommand } from "@aws-sdk/client-route-53"; // ES Modules import
+ * // const { Route53Client, GetAccountLimitCommand } = require("@aws-sdk/client-route-53"); // CommonJS import
+ * const client = new Route53Client(config);
+ * const command = new GetAccountLimitCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link GetAccountLimitCommandInput} for command's `input` shape.
+ * @see {@link GetAccountLimitCommandOutput} for command's `response` shape.
+ * @see {@link Route53ClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+class GetAccountLimitCommand extends smithy_client_1.Command {
+    // Start section: command_properties
+    // End section: command_properties
+    constructor(input) {
+        // Start section: command_constructor
+        super();
+        this.input = input;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack, configuration, options) {
+        this.middlewareStack.use(middleware_serde_1.getSerdePlugin(configuration, this.serialize, this.deserialize));
+        const stack = clientStack.concat(this.middlewareStack);
+        const { logger } = configuration;
+        const clientName = "Route53Client";
+        const commandName = "GetAccountLimitCommand";
+        const handlerExecutionContext = {
+            logger,
+            clientName,
+            commandName,
+            inputFilterSensitiveLog: models_0_1.GetAccountLimitRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: models_0_1.GetAccountLimitResponse.filterSensitiveLog,
+        };
+        const { requestHandler } = configuration;
+        return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
+    }
+    serialize(input, context) {
+        return Aws_restXml_1.serializeAws_restXmlGetAccountLimitCommand(input, context);
+    }
+    deserialize(output, context) {
+        return Aws_restXml_1.deserializeAws_restXmlGetAccountLimitCommand(output, context);
+    }
+}
+exports.GetAccountLimitCommand = GetAccountLimitCommand;
+//# sourceMappingURL=GetAccountLimitCommand.js.map

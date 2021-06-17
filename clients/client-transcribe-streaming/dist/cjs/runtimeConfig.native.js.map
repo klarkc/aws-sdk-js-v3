@@ -1,0 +1,1 @@
+{"version":3,"file":"runtimeConfig.native.js","sourceRoot":"","sources":["../../runtimeConfig.native.ts"],"names":[],"mappings":";;;AAAA,qDAA+C;AAC/C,sGAA2G;AAE3G,mEAAiF;AAEjF;;GAEG;AACU,QAAA,mBAAmB,GAA6B;IAC3D,GAAG,2CAAe;IAClB,OAAO,EAAE,cAAc;IACvB,iCAAiC,EAAE,GAAG,EAAE,CAAC,+DAAyB;IAClE,cAAc,EAAE,IAAI,sDAAgB,EAAE;IACtC,MAAM,EAAE,kBAAM;CACf,CAAC"}

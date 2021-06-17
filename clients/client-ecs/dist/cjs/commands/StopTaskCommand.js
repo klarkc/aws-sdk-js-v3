@@ -1,0 +1,73 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StopTaskCommand = void 0;
+const models_0_1 = require("../models/models_0");
+const Aws_json1_1_1 = require("../protocols/Aws_json1_1");
+const middleware_serde_1 = require("@aws-sdk/middleware-serde");
+const smithy_client_1 = require("@aws-sdk/smithy-client");
+/**
+ * <p>Stops a running task. Any tags associated with the task will be deleted.</p>
+ * 		       <p>When <a>StopTask</a> is called on a task, the equivalent of <code>docker
+ * 				stop</code> is issued to the containers running in the task. This results in a
+ * 				<code>SIGTERM</code> value and a default 30-second timeout, after which the
+ * 				<code>SIGKILL</code> value is sent and the containers are forcibly stopped. If the
+ * 			container handles the <code>SIGTERM</code> value gracefully and exits within 30 seconds
+ * 			from receiving it, no <code>SIGKILL</code> value is sent.</p>
+ * 		       <note>
+ * 			         <p>The default 30-second timeout can be configured on the Amazon ECS container agent with
+ * 				the <code>ECS_CONTAINER_STOP_TIMEOUT</code> variable. For more information, see
+ * 					<a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html">Amazon ECS Container Agent Configuration</a> in the
+ * 					<i>Amazon Elastic Container Service Developer Guide</i>.</p>
+ * 		       </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ECSClient, StopTaskCommand } from "@aws-sdk/client-ecs"; // ES Modules import
+ * // const { ECSClient, StopTaskCommand } = require("@aws-sdk/client-ecs"); // CommonJS import
+ * const client = new ECSClient(config);
+ * const command = new StopTaskCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link StopTaskCommandInput} for command's `input` shape.
+ * @see {@link StopTaskCommandOutput} for command's `response` shape.
+ * @see {@link ECSClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+class StopTaskCommand extends smithy_client_1.Command {
+    // Start section: command_properties
+    // End section: command_properties
+    constructor(input) {
+        // Start section: command_constructor
+        super();
+        this.input = input;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack, configuration, options) {
+        this.middlewareStack.use(middleware_serde_1.getSerdePlugin(configuration, this.serialize, this.deserialize));
+        const stack = clientStack.concat(this.middlewareStack);
+        const { logger } = configuration;
+        const clientName = "ECSClient";
+        const commandName = "StopTaskCommand";
+        const handlerExecutionContext = {
+            logger,
+            clientName,
+            commandName,
+            inputFilterSensitiveLog: models_0_1.StopTaskRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: models_0_1.StopTaskResponse.filterSensitiveLog,
+        };
+        const { requestHandler } = configuration;
+        return stack.resolve((request) => requestHandler.handle(request.request, options || {}), handlerExecutionContext);
+    }
+    serialize(input, context) {
+        return Aws_json1_1_1.serializeAws_json1_1StopTaskCommand(input, context);
+    }
+    deserialize(output, context) {
+        return Aws_json1_1_1.deserializeAws_json1_1StopTaskCommand(output, context);
+    }
+}
+exports.StopTaskCommand = StopTaskCommand;
+//# sourceMappingURL=StopTaskCommand.js.map

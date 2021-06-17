@@ -1,0 +1,53 @@
+import { ServiceInputTypes, ServiceOutputTypes, WAFV2ClientResolvedConfig } from "../WAFV2Client";
+import { PutLoggingConfigurationRequest, PutLoggingConfigurationResponse } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface PutLoggingConfigurationCommandInput extends PutLoggingConfigurationRequest {
+}
+export interface PutLoggingConfigurationCommandOutput extends PutLoggingConfigurationResponse, __MetadataBearer {
+}
+/**
+ * <p>Enables the specified <a>LoggingConfiguration</a>, to start logging from a web ACL, according to the configuration provided.</p>
+ *          <p>You can access information about all traffic that AWS WAF inspects using the following
+ *          steps:</p>
+ *          <ol>
+ *             <li>
+ *                <p>Create an Amazon Kinesis Data
+ *             Firehose. </p>
+ *                <p>Create the data firehose with a PUT source and in the Region that you are operating. If you are capturing logs for Amazon CloudFront, always create the firehose in US East (N. Virginia). </p>
+ *                <p>Give the data firehose a name that starts with the prefix <code>aws-waf-logs-</code>. For example, <code>aws-waf-logs-us-east-2-analytics</code>.</p>
+ *                <note>
+ *                   <p>Do not create the data firehose using a <code>Kinesis stream</code> as your source.</p>
+ *                </note>
+ *             </li>
+ *             <li>
+ *                <p>Associate that firehose to your web ACL using a <code>PutLoggingConfiguration</code> request.</p>
+ *             </li>
+ *          </ol>
+ *
+ *          <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code> request, AWS WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose.  For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/logging.html">Logging Web ACL Traffic Information</a> in the <i>AWS WAF Developer Guide</i>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { WAFV2Client, PutLoggingConfigurationCommand } from "@aws-sdk/client-wafv2"; // ES Modules import
+ * // const { WAFV2Client, PutLoggingConfigurationCommand } = require("@aws-sdk/client-wafv2"); // CommonJS import
+ * const client = new WAFV2Client(config);
+ * const command = new PutLoggingConfigurationCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link PutLoggingConfigurationCommandInput} for command's `input` shape.
+ * @see {@link PutLoggingConfigurationCommandOutput} for command's `response` shape.
+ * @see {@link WAFV2ClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class PutLoggingConfigurationCommand extends $Command<PutLoggingConfigurationCommandInput, PutLoggingConfigurationCommandOutput, WAFV2ClientResolvedConfig> {
+    readonly input: PutLoggingConfigurationCommandInput;
+    constructor(input: PutLoggingConfigurationCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: WAFV2ClientResolvedConfig, options?: __HttpHandlerOptions): Handler<PutLoggingConfigurationCommandInput, PutLoggingConfigurationCommandOutput>;
+    private serialize;
+    private deserialize;
+}

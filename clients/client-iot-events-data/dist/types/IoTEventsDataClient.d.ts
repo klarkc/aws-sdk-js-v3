@@ -1,0 +1,148 @@
+import { BatchAcknowledgeAlarmCommandInput, BatchAcknowledgeAlarmCommandOutput } from "./commands/BatchAcknowledgeAlarmCommand";
+import { BatchDisableAlarmCommandInput, BatchDisableAlarmCommandOutput } from "./commands/BatchDisableAlarmCommand";
+import { BatchEnableAlarmCommandInput, BatchEnableAlarmCommandOutput } from "./commands/BatchEnableAlarmCommand";
+import { BatchPutMessageCommandInput, BatchPutMessageCommandOutput } from "./commands/BatchPutMessageCommand";
+import { BatchResetAlarmCommandInput, BatchResetAlarmCommandOutput } from "./commands/BatchResetAlarmCommand";
+import { BatchSnoozeAlarmCommandInput, BatchSnoozeAlarmCommandOutput } from "./commands/BatchSnoozeAlarmCommand";
+import { BatchUpdateDetectorCommandInput, BatchUpdateDetectorCommandOutput } from "./commands/BatchUpdateDetectorCommand";
+import { DescribeAlarmCommandInput, DescribeAlarmCommandOutput } from "./commands/DescribeAlarmCommand";
+import { DescribeDetectorCommandInput, DescribeDetectorCommandOutput } from "./commands/DescribeDetectorCommand";
+import { ListAlarmsCommandInput, ListAlarmsCommandOutput } from "./commands/ListAlarmsCommand";
+import { ListDetectorsCommandInput, ListDetectorsCommandOutput } from "./commands/ListDetectorsCommand";
+import { EndpointsInputConfig, EndpointsResolvedConfig, RegionInputConfig, RegionResolvedConfig } from "@aws-sdk/config-resolver";
+import { HostHeaderInputConfig, HostHeaderResolvedConfig } from "@aws-sdk/middleware-host-header";
+import { RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
+import { AwsAuthInputConfig, AwsAuthResolvedConfig } from "@aws-sdk/middleware-signing";
+import { UserAgentInputConfig, UserAgentResolvedConfig } from "@aws-sdk/middleware-user-agent";
+import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+import { Client as __Client, SmithyConfiguration as __SmithyConfiguration, SmithyResolvedConfiguration as __SmithyResolvedConfiguration } from "@aws-sdk/smithy-client";
+import { Provider, RegionInfoProvider, Credentials as __Credentials, Decoder as __Decoder, Encoder as __Encoder, HashConstructor as __HashConstructor, HttpHandlerOptions as __HttpHandlerOptions, Logger as __Logger, Provider as __Provider, StreamCollector as __StreamCollector, UrlParser as __UrlParser, UserAgent as __UserAgent } from "@aws-sdk/types";
+export declare type ServiceInputTypes = BatchAcknowledgeAlarmCommandInput | BatchDisableAlarmCommandInput | BatchEnableAlarmCommandInput | BatchPutMessageCommandInput | BatchResetAlarmCommandInput | BatchSnoozeAlarmCommandInput | BatchUpdateDetectorCommandInput | DescribeAlarmCommandInput | DescribeDetectorCommandInput | ListAlarmsCommandInput | ListDetectorsCommandInput;
+export declare type ServiceOutputTypes = BatchAcknowledgeAlarmCommandOutput | BatchDisableAlarmCommandOutput | BatchEnableAlarmCommandOutput | BatchPutMessageCommandOutput | BatchResetAlarmCommandOutput | BatchSnoozeAlarmCommandOutput | BatchUpdateDetectorCommandOutput | DescribeAlarmCommandOutput | DescribeDetectorCommandOutput | ListAlarmsCommandOutput | ListDetectorsCommandOutput;
+export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+    /**
+     * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+     */
+    requestHandler?: __HttpHandler;
+    /**
+     * A constructor for a class implementing the @aws-sdk/types.Hash interface
+     * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
+     * @internal
+     */
+    sha256?: __HashConstructor;
+    /**
+     * The function that will be used to convert strings into HTTP endpoints.
+     * @internal
+     */
+    urlParser?: __UrlParser;
+    /**
+     * A function that can calculate the length of a request body.
+     * @internal
+     */
+    bodyLengthChecker?: (body: any) => number | undefined;
+    /**
+     * A function that converts a stream into an array of bytes.
+     * @internal
+     */
+    streamCollector?: __StreamCollector;
+    /**
+     * The function that will be used to convert a base64-encoded string to a byte array.
+     * @internal
+     */
+    base64Decoder?: __Decoder;
+    /**
+     * The function that will be used to convert binary data to a base64-encoded string.
+     * @internal
+     */
+    base64Encoder?: __Encoder;
+    /**
+     * The function that will be used to convert a UTF8-encoded string to a byte array.
+     * @internal
+     */
+    utf8Decoder?: __Decoder;
+    /**
+     * The function that will be used to convert binary data to a UTF-8 encoded string.
+     * @internal
+     */
+    utf8Encoder?: __Encoder;
+    /**
+     * The runtime environment.
+     * @internal
+     */
+    runtime?: string;
+    /**
+     * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+     * trait of an operation.
+     */
+    disableHostPrefix?: boolean;
+    /**
+     * Unique service identifier.
+     * @internal
+     */
+    serviceId?: string;
+    /**
+     * The AWS region to which this client will send requests
+     */
+    region?: string | __Provider<string>;
+    /**
+     * Value for how many times a request will be made at most in case of retry.
+     */
+    maxAttempts?: number | __Provider<number>;
+    /**
+     * Specifies provider for retry algorithm to use.
+     * @internal
+     */
+    retryModeProvider?: __Provider<string>;
+    /**
+     * Optional logger for logging debug/info/warn/error.
+     */
+    logger?: __Logger;
+    /**
+     * Default credentials provider; Not available in browser runtime.
+     * @internal
+     */
+    credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
+    /**
+     * Fetch related hostname, signing name or signing region with given region.
+     * @internal
+     */
+    regionInfoProvider?: RegionInfoProvider;
+    /**
+     * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
+     * @internal
+     */
+    defaultUserAgentProvider?: Provider<__UserAgent>;
+}
+declare type IoTEventsDataClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> & ClientDefaults & RegionInputConfig & EndpointsInputConfig & RetryInputConfig & HostHeaderInputConfig & AwsAuthInputConfig & UserAgentInputConfig;
+/**
+ * The configuration interface of IoTEventsDataClient class constructor that set the region, credentials and other options.
+ */
+export interface IoTEventsDataClientConfig extends IoTEventsDataClientConfigType {
+}
+declare type IoTEventsDataClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> & Required<ClientDefaults> & RegionResolvedConfig & EndpointsResolvedConfig & RetryResolvedConfig & HostHeaderResolvedConfig & AwsAuthResolvedConfig & UserAgentResolvedConfig;
+/**
+ * The resolved configuration interface of IoTEventsDataClient class. This is resolved and normalized from the {@link IoTEventsDataClientConfig | constructor configuration interface}.
+ */
+export interface IoTEventsDataClientResolvedConfig extends IoTEventsDataClientResolvedConfigType {
+}
+/**
+ * <p>AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and
+ *       triggers actions when such events occur. You can use AWS IoT Events Data API commands to send inputs to
+ *       detectors, list detectors, and view or update a detector's status.</p>
+ *          <p> For more information, see <a href="https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html">What is AWS IoT Events?</a> in the
+ *         <i>AWS IoT Events Developer Guide</i>.</p>
+ */
+export declare class IoTEventsDataClient extends __Client<__HttpHandlerOptions, ServiceInputTypes, ServiceOutputTypes, IoTEventsDataClientResolvedConfig> {
+    /**
+     * The resolved configuration of IoTEventsDataClient class. This is resolved and normalized from the {@link IoTEventsDataClientConfig | constructor configuration interface}.
+     */
+    readonly config: IoTEventsDataClientResolvedConfig;
+    constructor(configuration: IoTEventsDataClientConfig);
+    /**
+     * Destroy underlying resources, like sockets. It's usually not necessary to do this.
+     * However in Node.js, it's best to explicitly shut down the client's agent when it is no longer needed.
+     * Otherwise, sockets might stay open for quite a long time before the server terminates them.
+     */
+    destroy(): void;
+}
+export {};

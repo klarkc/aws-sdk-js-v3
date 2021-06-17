@@ -1,0 +1,36 @@
+import { LicenseManagerClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LicenseManagerClient";
+import { DeleteLicenseConfigurationRequest, DeleteLicenseConfigurationResponse } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface DeleteLicenseConfigurationCommandInput extends DeleteLicenseConfigurationRequest {
+}
+export interface DeleteLicenseConfigurationCommandOutput extends DeleteLicenseConfigurationResponse, __MetadataBearer {
+}
+/**
+ * <p>Deletes the specified license configuration.</p>
+ *          <p>You cannot delete a license configuration that is in use.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { LicenseManagerClient, DeleteLicenseConfigurationCommand } from "@aws-sdk/client-license-manager"; // ES Modules import
+ * // const { LicenseManagerClient, DeleteLicenseConfigurationCommand } = require("@aws-sdk/client-license-manager"); // CommonJS import
+ * const client = new LicenseManagerClient(config);
+ * const command = new DeleteLicenseConfigurationCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DeleteLicenseConfigurationCommandInput} for command's `input` shape.
+ * @see {@link DeleteLicenseConfigurationCommandOutput} for command's `response` shape.
+ * @see {@link LicenseManagerClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class DeleteLicenseConfigurationCommand extends $Command<DeleteLicenseConfigurationCommandInput, DeleteLicenseConfigurationCommandOutput, LicenseManagerClientResolvedConfig> {
+    readonly input: DeleteLicenseConfigurationCommandInput;
+    constructor(input: DeleteLicenseConfigurationCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: LicenseManagerClientResolvedConfig, options?: __HttpHandlerOptions): Handler<DeleteLicenseConfigurationCommandInput, DeleteLicenseConfigurationCommandOutput>;
+    private serialize;
+    private deserialize;
+}

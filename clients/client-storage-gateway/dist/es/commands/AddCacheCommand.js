@@ -1,0 +1,69 @@
+import { __extends } from "tslib";
+import { AddCacheInput, AddCacheOutput } from "../models/models_0";
+import { deserializeAws_json1_1AddCacheCommand, serializeAws_json1_1AddCacheCommand } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Configures one or more gateway local disks as cache for a gateway. This operation is
+ *          only supported in the cached volume, tape, and file gateway type (see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html">How AWS Storage Gateway works (architecture)</a>.</p>
+ *
+ *          <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to
+ *          add cache, and one or more disk IDs that you want to configure as cache.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { StorageGatewayClient, AddCacheCommand } from "@aws-sdk/client-storage-gateway"; // ES Modules import
+ * // const { StorageGatewayClient, AddCacheCommand } = require("@aws-sdk/client-storage-gateway"); // CommonJS import
+ * const client = new StorageGatewayClient(config);
+ * const command = new AddCacheCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link AddCacheCommandInput} for command's `input` shape.
+ * @see {@link AddCacheCommandOutput} for command's `response` shape.
+ * @see {@link StorageGatewayClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var AddCacheCommand = /** @class */ (function (_super) {
+    __extends(AddCacheCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function AddCacheCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    AddCacheCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "StorageGatewayClient";
+        var commandName = "AddCacheCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: AddCacheInput.filterSensitiveLog,
+            outputFilterSensitiveLog: AddCacheOutput.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    AddCacheCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1AddCacheCommand(input, context);
+    };
+    AddCacheCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1AddCacheCommand(output, context);
+    };
+    return AddCacheCommand;
+}($Command));
+export { AddCacheCommand };
+//# sourceMappingURL=AddCacheCommand.js.map

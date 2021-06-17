@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.resolveWebSocketConfig = void 0;
+const signer_1 = require("./signer");
+const resolveWebSocketConfig = (input) => {
+    var _a;
+    return ((_a = input.requestHandler.metadata) === null || _a === void 0 ? void 0 : _a.handlerProtocol) !== "websocket"
+        ? input
+        : {
+            ...input,
+            signer: async () => {
+                const signerObj = await input.signer();
+                if (validateSigner(signerObj)) {
+                    return new signer_1.SignatureV4({ signer: signerObj });
+                }
+                throw new Error("Expected SignatureV4 signer, please check the client constructor.");
+            },
+        };
+};
+exports.resolveWebSocketConfig = resolveWebSocketConfig;
+const validateSigner = (signer) => 
+// We cannot use instanceof here. Because we might import the wrong SignatureV4
+// constructor here as multiple version of packages maybe installed here.
+signer.constructor.toString().indexOf("SignatureV4") >= 0;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uZmlndXJhdGlvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9jb25maWd1cmF0aW9uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUdBLHFDQUF1QztBQW9CaEMsTUFBTSxzQkFBc0IsR0FBRyxDQUNwQyxLQUFvRCxFQUN2QixFQUFFOztJQUMvQixPQUFBLENBQUEsTUFBQSxLQUFLLENBQUMsY0FBYyxDQUFDLFFBQVEsMENBQUUsZUFBZSxNQUFLLFdBQVc7UUFDNUQsQ0FBQyxDQUFDLEtBQUs7UUFDUCxDQUFDLENBQUM7WUFDRSxHQUFHLEtBQUs7WUFDUixNQUFNLEVBQUUsS0FBSyxJQUFJLEVBQUU7Z0JBQ2pCLE1BQU0sU0FBUyxHQUFHLE1BQU0sS0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDO2dCQUN2QyxJQUFJLGNBQWMsQ0FBQyxTQUFTLENBQUMsRUFBRTtvQkFDN0IsT0FBTyxJQUFJLG9CQUFXLENBQUMsRUFBRSxNQUFNLEVBQUUsU0FBUyxFQUFFLENBQUMsQ0FBQztpQkFDL0M7Z0JBQ0QsTUFBTSxJQUFJLEtBQUssQ0FBQyxtRUFBbUUsQ0FBQyxDQUFDO1lBQ3ZGLENBQUM7U0FDRixDQUFBO0NBQUEsQ0FBQztBQWRLLFFBQUEsc0JBQXNCLDBCQWMzQjtBQUVSLE1BQU0sY0FBYyxHQUFHLENBQUMsTUFBVyxFQUE2QixFQUFFO0FBQ2hFLCtFQUErRTtBQUMvRSx5RUFBeUU7QUFDeEUsTUFBTSxDQUFDLFdBQVcsQ0FBQyxRQUFRLEVBQWEsQ0FBQyxPQUFPLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgU2lnbmF0dXJlVjQgYXMgQmFzZVNpZ25hdHVyZVY0IH0gZnJvbSBcIkBhd3Mtc2RrL3NpZ25hdHVyZS12NFwiO1xuaW1wb3J0IHsgUHJvdmlkZXIsIFJlcXVlc3RIYW5kbGVyLCBSZXF1ZXN0U2lnbmVyIH0gZnJvbSBcIkBhd3Mtc2RrL3R5cGVzXCI7XG5cbmltcG9ydCB7IFNpZ25hdHVyZVY0IH0gZnJvbSBcIi4vc2lnbmVyXCI7XG5cbmV4cG9ydCBpbnRlcmZhY2UgV2ViU29ja2V0SW5wdXRDb25maWcge31cblxuaW50ZXJmYWNlIFByZXZpb3VzbHlSZXNvbHZlZCB7XG4gIHNpZ25lcjogUHJvdmlkZXI8UmVxdWVzdFNpZ25lcj47XG4gIHJlcXVlc3RIYW5kbGVyOiBSZXF1ZXN0SGFuZGxlcjxhbnksIGFueT47XG59XG5cbmV4cG9ydCBpbnRlcmZhY2UgV2ViU29ja2V0UmVzb2x2ZWRDb25maWcge1xuICAvKipcbiAgICogUmVzb2x2ZWQgdmFsdWUgb2YgaW5wdXQgY29uZmlnIHtAbGluayBBd3NBdXRoSW5wdXRDb25maWcuc2lnbmVyfVxuICAgKi9cbiAgc2lnbmVyOiBQcm92aWRlcjxSZXF1ZXN0U2lnbmVyPjtcbiAgLyoqXG4gICAqIFRoZSBIVFRQIGhhbmRsZXIgdG8gdXNlLiBGZXRjaCBpbiBicm93c2VyIGFuZCBIdHRwcyBpbiBOb2RlanMuXG4gICAqL1xuICByZXF1ZXN0SGFuZGxlcjogUmVxdWVzdEhhbmRsZXI8YW55LCBhbnk+O1xufVxuXG5leHBvcnQgY29uc3QgcmVzb2x2ZVdlYlNvY2tldENvbmZpZyA9IDxUPihcbiAgaW5wdXQ6IFQgJiBXZWJTb2NrZXRJbnB1dENvbmZpZyAmIFByZXZpb3VzbHlSZXNvbHZlZFxuKTogVCAmIFdlYlNvY2tldFJlc29sdmVkQ29uZmlnID0+XG4gIGlucHV0LnJlcXVlc3RIYW5kbGVyLm1ldGFkYXRhPy5oYW5kbGVyUHJvdG9jb2wgIT09IFwid2Vic29ja2V0XCJcbiAgICA/IGlucHV0XG4gICAgOiB7XG4gICAgICAgIC4uLmlucHV0LFxuICAgICAgICBzaWduZXI6IGFzeW5jICgpID0+IHtcbiAgICAgICAgICBjb25zdCBzaWduZXJPYmogPSBhd2FpdCBpbnB1dC5zaWduZXIoKTtcbiAgICAgICAgICBpZiAodmFsaWRhdGVTaWduZXIoc2lnbmVyT2JqKSkge1xuICAgICAgICAgICAgcmV0dXJuIG5ldyBTaWduYXR1cmVWNCh7IHNpZ25lcjogc2lnbmVyT2JqIH0pO1xuICAgICAgICAgIH1cbiAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoXCJFeHBlY3RlZCBTaWduYXR1cmVWNCBzaWduZXIsIHBsZWFzZSBjaGVjayB0aGUgY2xpZW50IGNvbnN0cnVjdG9yLlwiKTtcbiAgICAgICAgfSxcbiAgICAgIH07XG5cbmNvbnN0IHZhbGlkYXRlU2lnbmVyID0gKHNpZ25lcjogYW55KTogc2lnbmVyIGlzIEJhc2VTaWduYXR1cmVWNCA9PlxuICAvLyBXZSBjYW5ub3QgdXNlIGluc3RhbmNlb2YgaGVyZS4gQmVjYXVzZSB3ZSBtaWdodCBpbXBvcnQgdGhlIHdyb25nIFNpZ25hdHVyZVY0XG4gIC8vIGNvbnN0cnVjdG9yIGhlcmUgYXMgbXVsdGlwbGUgdmVyc2lvbiBvZiBwYWNrYWdlcyBtYXliZSBpbnN0YWxsZWQgaGVyZS5cbiAgKHNpZ25lci5jb25zdHJ1Y3Rvci50b1N0cmluZygpIGFzIHN0cmluZykuaW5kZXhPZihcIlNpZ25hdHVyZVY0XCIpID49IDA7XG4iXX0=

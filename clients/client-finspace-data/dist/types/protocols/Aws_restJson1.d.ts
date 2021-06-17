@@ -1,0 +1,11 @@
+import { CreateChangesetCommandInput, CreateChangesetCommandOutput } from "../commands/CreateChangesetCommand";
+import { GetProgrammaticAccessCredentialsCommandInput, GetProgrammaticAccessCredentialsCommandOutput } from "../commands/GetProgrammaticAccessCredentialsCommand";
+import { GetWorkingLocationCommandInput, GetWorkingLocationCommandOutput } from "../commands/GetWorkingLocationCommand";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
+import { SerdeContext as __SerdeContext } from "@aws-sdk/types";
+export declare const serializeAws_restJson1CreateChangesetCommand: (input: CreateChangesetCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1GetProgrammaticAccessCredentialsCommand: (input: GetProgrammaticAccessCredentialsCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1GetWorkingLocationCommand: (input: GetWorkingLocationCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const deserializeAws_restJson1CreateChangesetCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<CreateChangesetCommandOutput>;
+export declare const deserializeAws_restJson1GetProgrammaticAccessCredentialsCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<GetProgrammaticAccessCredentialsCommandOutput>;
+export declare const deserializeAws_restJson1GetWorkingLocationCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<GetWorkingLocationCommandOutput>;

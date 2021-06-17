@@ -1,0 +1,65 @@
+import { __extends } from "tslib";
+import { GetGroupRequest, GetGroupResponse } from "../models/models_0";
+import { deserializeAws_restJson1GetGroupCommand, serializeAws_restJson1GetGroupCommand, } from "../protocols/Aws_restJson1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * Retrieves information about a group.
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { GreengrassClient, GetGroupCommand } from "@aws-sdk/client-greengrass"; // ES Modules import
+ * // const { GreengrassClient, GetGroupCommand } = require("@aws-sdk/client-greengrass"); // CommonJS import
+ * const client = new GreengrassClient(config);
+ * const command = new GetGroupCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link GetGroupCommandInput} for command's `input` shape.
+ * @see {@link GetGroupCommandOutput} for command's `response` shape.
+ * @see {@link GreengrassClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var GetGroupCommand = /** @class */ (function (_super) {
+    __extends(GetGroupCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function GetGroupCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    GetGroupCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "GreengrassClient";
+        var commandName = "GetGroupCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: GetGroupRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: GetGroupResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    GetGroupCommand.prototype.serialize = function (input, context) {
+        return serializeAws_restJson1GetGroupCommand(input, context);
+    };
+    GetGroupCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_restJson1GetGroupCommand(output, context);
+    };
+    return GetGroupCommand;
+}($Command));
+export { GetGroupCommand };
+//# sourceMappingURL=GetGroupCommand.js.map

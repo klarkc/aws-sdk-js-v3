@@ -1,0 +1,65 @@
+import { __extends } from "tslib";
+import { GetApplicationRequest, GetApplicationResponse } from "../models/models_0";
+import { deserializeAws_restJson1GetApplicationCommand, serializeAws_restJson1GetApplicationCommand, } from "../protocols/Aws_restJson1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, avoiding the ABA addressing problem.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ServiceCatalogAppRegistryClient, GetApplicationCommand } from "@aws-sdk/client-service-catalog-appregistry"; // ES Modules import
+ * // const { ServiceCatalogAppRegistryClient, GetApplicationCommand } = require("@aws-sdk/client-service-catalog-appregistry"); // CommonJS import
+ * const client = new ServiceCatalogAppRegistryClient(config);
+ * const command = new GetApplicationCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link GetApplicationCommandInput} for command's `input` shape.
+ * @see {@link GetApplicationCommandOutput} for command's `response` shape.
+ * @see {@link ServiceCatalogAppRegistryClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var GetApplicationCommand = /** @class */ (function (_super) {
+    __extends(GetApplicationCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function GetApplicationCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    GetApplicationCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "ServiceCatalogAppRegistryClient";
+        var commandName = "GetApplicationCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: GetApplicationRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: GetApplicationResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    GetApplicationCommand.prototype.serialize = function (input, context) {
+        return serializeAws_restJson1GetApplicationCommand(input, context);
+    };
+    GetApplicationCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_restJson1GetApplicationCommand(output, context);
+    };
+    return GetApplicationCommand;
+}($Command));
+export { GetApplicationCommand };
+//# sourceMappingURL=GetApplicationCommand.js.map

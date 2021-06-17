@@ -1,0 +1,38 @@
+import { LightsailClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../LightsailClient";
+import { CreateDiskRequest, CreateDiskResult } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface CreateDiskCommandInput extends CreateDiskRequest {
+}
+export interface CreateDiskCommandOutput extends CreateDiskResult, __MetadataBearer {
+}
+/**
+ * <p>Creates a block storage disk that can be attached to an Amazon Lightsail instance in the
+ *       same Availability Zone (e.g., <code>us-east-2a</code>).</p>
+ *          <p>The <code>create disk</code> operation supports tag-based access control via request tags.
+ *       For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { LightsailClient, CreateDiskCommand } from "@aws-sdk/client-lightsail"; // ES Modules import
+ * // const { LightsailClient, CreateDiskCommand } = require("@aws-sdk/client-lightsail"); // CommonJS import
+ * const client = new LightsailClient(config);
+ * const command = new CreateDiskCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link CreateDiskCommandInput} for command's `input` shape.
+ * @see {@link CreateDiskCommandOutput} for command's `response` shape.
+ * @see {@link LightsailClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class CreateDiskCommand extends $Command<CreateDiskCommandInput, CreateDiskCommandOutput, LightsailClientResolvedConfig> {
+    readonly input: CreateDiskCommandInput;
+    constructor(input: CreateDiskCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: LightsailClientResolvedConfig, options?: __HttpHandlerOptions): Handler<CreateDiskCommandInput, CreateDiskCommandOutput>;
+    private serialize;
+    private deserialize;
+}

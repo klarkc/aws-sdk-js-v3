@@ -1,0 +1,75 @@
+import { __extends } from "tslib";
+import { PutRemediationConfigurationsRequest, PutRemediationConfigurationsResponse } from "../models/models_0";
+import { deserializeAws_json1_1PutRemediationConfigurationsCommand, serializeAws_json1_1PutRemediationConfigurationsCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Adds or updates the remediation configuration with a specific AWS Config rule with the
+ * 			selected target or action.
+ * 			The API creates the <code>RemediationConfiguration</code> object for the AWS Config rule.
+ * 		The AWS Config rule must already exist for you to add a remediation configuration.
+ * 		The target (SSM document) must exist and have permissions to use the target. </p>
+ * 		       <note>
+ *             <p>If you make backward incompatible changes to the SSM document,
+ * 			you must call this again to ensure the remediations can run.</p>
+ * 			         <p>This API does not support adding remediation configurations for service-linked AWS Config Rules such as Organization Config rules,
+ * 				the rules deployed by conformance packs, and rules deployed by AWS Security Hub.</p>
+ *          </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ConfigServiceClient, PutRemediationConfigurationsCommand } from "@aws-sdk/client-config-service"; // ES Modules import
+ * // const { ConfigServiceClient, PutRemediationConfigurationsCommand } = require("@aws-sdk/client-config-service"); // CommonJS import
+ * const client = new ConfigServiceClient(config);
+ * const command = new PutRemediationConfigurationsCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link PutRemediationConfigurationsCommandInput} for command's `input` shape.
+ * @see {@link PutRemediationConfigurationsCommandOutput} for command's `response` shape.
+ * @see {@link ConfigServiceClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var PutRemediationConfigurationsCommand = /** @class */ (function (_super) {
+    __extends(PutRemediationConfigurationsCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function PutRemediationConfigurationsCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    PutRemediationConfigurationsCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "ConfigServiceClient";
+        var commandName = "PutRemediationConfigurationsCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: PutRemediationConfigurationsRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: PutRemediationConfigurationsResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    PutRemediationConfigurationsCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1PutRemediationConfigurationsCommand(input, context);
+    };
+    PutRemediationConfigurationsCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1PutRemediationConfigurationsCommand(output, context);
+    };
+    return PutRemediationConfigurationsCommand;
+}($Command));
+export { PutRemediationConfigurationsCommand };
+//# sourceMappingURL=PutRemediationConfigurationsCommand.js.map

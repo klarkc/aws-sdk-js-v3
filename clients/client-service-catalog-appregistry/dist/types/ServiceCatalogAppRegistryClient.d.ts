@@ -1,0 +1,153 @@
+import { AssociateAttributeGroupCommandInput, AssociateAttributeGroupCommandOutput } from "./commands/AssociateAttributeGroupCommand";
+import { AssociateResourceCommandInput, AssociateResourceCommandOutput } from "./commands/AssociateResourceCommand";
+import { CreateApplicationCommandInput, CreateApplicationCommandOutput } from "./commands/CreateApplicationCommand";
+import { CreateAttributeGroupCommandInput, CreateAttributeGroupCommandOutput } from "./commands/CreateAttributeGroupCommand";
+import { DeleteApplicationCommandInput, DeleteApplicationCommandOutput } from "./commands/DeleteApplicationCommand";
+import { DeleteAttributeGroupCommandInput, DeleteAttributeGroupCommandOutput } from "./commands/DeleteAttributeGroupCommand";
+import { DisassociateAttributeGroupCommandInput, DisassociateAttributeGroupCommandOutput } from "./commands/DisassociateAttributeGroupCommand";
+import { DisassociateResourceCommandInput, DisassociateResourceCommandOutput } from "./commands/DisassociateResourceCommand";
+import { GetApplicationCommandInput, GetApplicationCommandOutput } from "./commands/GetApplicationCommand";
+import { GetAttributeGroupCommandInput, GetAttributeGroupCommandOutput } from "./commands/GetAttributeGroupCommand";
+import { ListApplicationsCommandInput, ListApplicationsCommandOutput } from "./commands/ListApplicationsCommand";
+import { ListAssociatedAttributeGroupsCommandInput, ListAssociatedAttributeGroupsCommandOutput } from "./commands/ListAssociatedAttributeGroupsCommand";
+import { ListAssociatedResourcesCommandInput, ListAssociatedResourcesCommandOutput } from "./commands/ListAssociatedResourcesCommand";
+import { ListAttributeGroupsCommandInput, ListAttributeGroupsCommandOutput } from "./commands/ListAttributeGroupsCommand";
+import { ListTagsForResourceCommandInput, ListTagsForResourceCommandOutput } from "./commands/ListTagsForResourceCommand";
+import { SyncResourceCommandInput, SyncResourceCommandOutput } from "./commands/SyncResourceCommand";
+import { TagResourceCommandInput, TagResourceCommandOutput } from "./commands/TagResourceCommand";
+import { UntagResourceCommandInput, UntagResourceCommandOutput } from "./commands/UntagResourceCommand";
+import { UpdateApplicationCommandInput, UpdateApplicationCommandOutput } from "./commands/UpdateApplicationCommand";
+import { UpdateAttributeGroupCommandInput, UpdateAttributeGroupCommandOutput } from "./commands/UpdateAttributeGroupCommand";
+import { EndpointsInputConfig, EndpointsResolvedConfig, RegionInputConfig, RegionResolvedConfig } from "@aws-sdk/config-resolver";
+import { HostHeaderInputConfig, HostHeaderResolvedConfig } from "@aws-sdk/middleware-host-header";
+import { RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
+import { AwsAuthInputConfig, AwsAuthResolvedConfig } from "@aws-sdk/middleware-signing";
+import { UserAgentInputConfig, UserAgentResolvedConfig } from "@aws-sdk/middleware-user-agent";
+import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+import { Client as __Client, SmithyConfiguration as __SmithyConfiguration, SmithyResolvedConfiguration as __SmithyResolvedConfiguration } from "@aws-sdk/smithy-client";
+import { Provider, RegionInfoProvider, Credentials as __Credentials, Decoder as __Decoder, Encoder as __Encoder, HashConstructor as __HashConstructor, HttpHandlerOptions as __HttpHandlerOptions, Logger as __Logger, Provider as __Provider, StreamCollector as __StreamCollector, UrlParser as __UrlParser, UserAgent as __UserAgent } from "@aws-sdk/types";
+export declare type ServiceInputTypes = AssociateAttributeGroupCommandInput | AssociateResourceCommandInput | CreateApplicationCommandInput | CreateAttributeGroupCommandInput | DeleteApplicationCommandInput | DeleteAttributeGroupCommandInput | DisassociateAttributeGroupCommandInput | DisassociateResourceCommandInput | GetApplicationCommandInput | GetAttributeGroupCommandInput | ListApplicationsCommandInput | ListAssociatedAttributeGroupsCommandInput | ListAssociatedResourcesCommandInput | ListAttributeGroupsCommandInput | ListTagsForResourceCommandInput | SyncResourceCommandInput | TagResourceCommandInput | UntagResourceCommandInput | UpdateApplicationCommandInput | UpdateAttributeGroupCommandInput;
+export declare type ServiceOutputTypes = AssociateAttributeGroupCommandOutput | AssociateResourceCommandOutput | CreateApplicationCommandOutput | CreateAttributeGroupCommandOutput | DeleteApplicationCommandOutput | DeleteAttributeGroupCommandOutput | DisassociateAttributeGroupCommandOutput | DisassociateResourceCommandOutput | GetApplicationCommandOutput | GetAttributeGroupCommandOutput | ListApplicationsCommandOutput | ListAssociatedAttributeGroupsCommandOutput | ListAssociatedResourcesCommandOutput | ListAttributeGroupsCommandOutput | ListTagsForResourceCommandOutput | SyncResourceCommandOutput | TagResourceCommandOutput | UntagResourceCommandOutput | UpdateApplicationCommandOutput | UpdateAttributeGroupCommandOutput;
+export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+    /**
+     * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+     */
+    requestHandler?: __HttpHandler;
+    /**
+     * A constructor for a class implementing the @aws-sdk/types.Hash interface
+     * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
+     * @internal
+     */
+    sha256?: __HashConstructor;
+    /**
+     * The function that will be used to convert strings into HTTP endpoints.
+     * @internal
+     */
+    urlParser?: __UrlParser;
+    /**
+     * A function that can calculate the length of a request body.
+     * @internal
+     */
+    bodyLengthChecker?: (body: any) => number | undefined;
+    /**
+     * A function that converts a stream into an array of bytes.
+     * @internal
+     */
+    streamCollector?: __StreamCollector;
+    /**
+     * The function that will be used to convert a base64-encoded string to a byte array.
+     * @internal
+     */
+    base64Decoder?: __Decoder;
+    /**
+     * The function that will be used to convert binary data to a base64-encoded string.
+     * @internal
+     */
+    base64Encoder?: __Encoder;
+    /**
+     * The function that will be used to convert a UTF8-encoded string to a byte array.
+     * @internal
+     */
+    utf8Decoder?: __Decoder;
+    /**
+     * The function that will be used to convert binary data to a UTF-8 encoded string.
+     * @internal
+     */
+    utf8Encoder?: __Encoder;
+    /**
+     * The runtime environment.
+     * @internal
+     */
+    runtime?: string;
+    /**
+     * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+     * trait of an operation.
+     */
+    disableHostPrefix?: boolean;
+    /**
+     * Unique service identifier.
+     * @internal
+     */
+    serviceId?: string;
+    /**
+     * The AWS region to which this client will send requests
+     */
+    region?: string | __Provider<string>;
+    /**
+     * Value for how many times a request will be made at most in case of retry.
+     */
+    maxAttempts?: number | __Provider<number>;
+    /**
+     * Specifies provider for retry algorithm to use.
+     * @internal
+     */
+    retryModeProvider?: __Provider<string>;
+    /**
+     * Optional logger for logging debug/info/warn/error.
+     */
+    logger?: __Logger;
+    /**
+     * Default credentials provider; Not available in browser runtime.
+     * @internal
+     */
+    credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
+    /**
+     * Fetch related hostname, signing name or signing region with given region.
+     * @internal
+     */
+    regionInfoProvider?: RegionInfoProvider;
+    /**
+     * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
+     * @internal
+     */
+    defaultUserAgentProvider?: Provider<__UserAgent>;
+}
+declare type ServiceCatalogAppRegistryClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> & ClientDefaults & RegionInputConfig & EndpointsInputConfig & RetryInputConfig & HostHeaderInputConfig & AwsAuthInputConfig & UserAgentInputConfig;
+/**
+ * The configuration interface of ServiceCatalogAppRegistryClient class constructor that set the region, credentials and other options.
+ */
+export interface ServiceCatalogAppRegistryClientConfig extends ServiceCatalogAppRegistryClientConfigType {
+}
+declare type ServiceCatalogAppRegistryClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> & Required<ClientDefaults> & RegionResolvedConfig & EndpointsResolvedConfig & RetryResolvedConfig & HostHeaderResolvedConfig & AwsAuthResolvedConfig & UserAgentResolvedConfig;
+/**
+ * The resolved configuration interface of ServiceCatalogAppRegistryClient class. This is resolved and normalized from the {@link ServiceCatalogAppRegistryClientConfig | constructor configuration interface}.
+ */
+export interface ServiceCatalogAppRegistryClientResolvedConfig extends ServiceCatalogAppRegistryClientResolvedConfigType {
+}
+/**
+ * <p> AWS Service Catalog AppRegistry enables organizations to understand the application context of their AWS resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.</p>
+ */
+export declare class ServiceCatalogAppRegistryClient extends __Client<__HttpHandlerOptions, ServiceInputTypes, ServiceOutputTypes, ServiceCatalogAppRegistryClientResolvedConfig> {
+    /**
+     * The resolved configuration of ServiceCatalogAppRegistryClient class. This is resolved and normalized from the {@link ServiceCatalogAppRegistryClientConfig | constructor configuration interface}.
+     */
+    readonly config: ServiceCatalogAppRegistryClientResolvedConfig;
+    constructor(configuration: ServiceCatalogAppRegistryClientConfig);
+    /**
+     * Destroy underlying resources, like sockets. It's usually not necessary to do this.
+     * However in Node.js, it's best to explicitly shut down the client's agent when it is no longer needed.
+     * Otherwise, sockets might stay open for quite a long time before the server terminates them.
+     */
+    destroy(): void;
+}
+export {};

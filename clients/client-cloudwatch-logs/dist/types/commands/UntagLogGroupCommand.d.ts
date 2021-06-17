@@ -1,0 +1,37 @@
+import { CloudWatchLogsClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchLogsClient";
+import { UntagLogGroupRequest } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface UntagLogGroupCommandInput extends UntagLogGroupRequest {
+}
+export interface UntagLogGroupCommandOutput extends __MetadataBearer {
+}
+/**
+ * <p>Removes the specified tags from the specified log group.</p>
+ *          <p>To list the tags for a log group, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html">ListTagsLogGroup</a>.
+ *       To add tags, use <a href="https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagLogGroup.html">TagLogGroup</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CloudWatchLogsClient, UntagLogGroupCommand } from "@aws-sdk/client-cloudwatch-logs"; // ES Modules import
+ * // const { CloudWatchLogsClient, UntagLogGroupCommand } = require("@aws-sdk/client-cloudwatch-logs"); // CommonJS import
+ * const client = new CloudWatchLogsClient(config);
+ * const command = new UntagLogGroupCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link UntagLogGroupCommandInput} for command's `input` shape.
+ * @see {@link UntagLogGroupCommandOutput} for command's `response` shape.
+ * @see {@link CloudWatchLogsClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class UntagLogGroupCommand extends $Command<UntagLogGroupCommandInput, UntagLogGroupCommandOutput, CloudWatchLogsClientResolvedConfig> {
+    readonly input: UntagLogGroupCommandInput;
+    constructor(input: UntagLogGroupCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: CloudWatchLogsClientResolvedConfig, options?: __HttpHandlerOptions): Handler<UntagLogGroupCommandInput, UntagLogGroupCommandOutput>;
+    private serialize;
+    private deserialize;
+}

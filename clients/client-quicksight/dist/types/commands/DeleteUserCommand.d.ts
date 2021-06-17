@@ -1,0 +1,37 @@
+import { QuickSightClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../QuickSightClient";
+import { DeleteUserRequest, DeleteUserResponse } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface DeleteUserCommandInput extends DeleteUserRequest {
+}
+export interface DeleteUserCommandOutput extends DeleteUserResponse, __MetadataBearer {
+}
+/**
+ * <p>Deletes the Amazon QuickSight user that is associated with the identity of the AWS
+ * 			Identity and Access Management (IAM) user or role that's making the call. The IAM user
+ * 			isn't deleted as a result of this call. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { QuickSightClient, DeleteUserCommand } from "@aws-sdk/client-quicksight"; // ES Modules import
+ * // const { QuickSightClient, DeleteUserCommand } = require("@aws-sdk/client-quicksight"); // CommonJS import
+ * const client = new QuickSightClient(config);
+ * const command = new DeleteUserCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DeleteUserCommandInput} for command's `input` shape.
+ * @see {@link DeleteUserCommandOutput} for command's `response` shape.
+ * @see {@link QuickSightClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class DeleteUserCommand extends $Command<DeleteUserCommandInput, DeleteUserCommandOutput, QuickSightClientResolvedConfig> {
+    readonly input: DeleteUserCommandInput;
+    constructor(input: DeleteUserCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: QuickSightClientResolvedConfig, options?: __HttpHandlerOptions): Handler<DeleteUserCommandInput, DeleteUserCommandOutput>;
+    private serialize;
+    private deserialize;
+}

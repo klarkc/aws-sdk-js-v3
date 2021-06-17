@@ -1,0 +1,62 @@
+import { CloudWatchClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../CloudWatchClient";
+import { PutMetricStreamInput, PutMetricStreamOutput } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import { Handler, MiddlewareStack, HttpHandlerOptions as __HttpHandlerOptions, MetadataBearer as __MetadataBearer } from "@aws-sdk/types";
+export interface PutMetricStreamCommandInput extends PutMetricStreamInput {
+}
+export interface PutMetricStreamCommandOutput extends PutMetricStreamOutput, __MetadataBearer {
+}
+/**
+ * <p>Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics
+ * 			to AWS destinations including
+ * 			Amazon S3 and to many third-party solutions.</p>
+ * 		       <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Metric-Streams.html">
+ * 		Using Metric Streams</a>.</p>
+ * 		       <p>To create a metric stream,
+ * 			you must be logged on to an account that has the <code>iam:PassRole</code> permission
+ * 			and either the <code>CloudWatchFullAccess</code>
+ * 		policy or the <code>cloudwatch:PutMetricStream</code>
+ * 		permission.</p>
+ * 		       <p>When you create or update a metric stream, you choose one of the following:</p>
+ * 		       <ul>
+ *             <li>
+ *                <p>Stream metrics from all metric namespaces in the account.</p>
+ *             </li>
+ *             <li>
+ *                <p>Stream metrics from all metric namespaces in the account, except
+ * 				for the namespaces that you list in <code>ExcludeFilters</code>.</p>
+ *             </li>
+ *             <li>
+ *                <p>Stream metrics from only the metric namespaces that you list in
+ * 				<code>IncludeFilters</code>.</p>
+ *             </li>
+ *          </ul>
+ *
+ * 		       <p>When you use <code>PutMetricStream</code> to create a new metric stream, the stream
+ * 		is created in the <code>running</code> state. If you use it to update an existing stream,
+ * 		the state of the stream is not changed.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CloudWatchClient, PutMetricStreamCommand } from "@aws-sdk/client-cloudwatch"; // ES Modules import
+ * // const { CloudWatchClient, PutMetricStreamCommand } = require("@aws-sdk/client-cloudwatch"); // CommonJS import
+ * const client = new CloudWatchClient(config);
+ * const command = new PutMetricStreamCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link PutMetricStreamCommandInput} for command's `input` shape.
+ * @see {@link PutMetricStreamCommandOutput} for command's `response` shape.
+ * @see {@link CloudWatchClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class PutMetricStreamCommand extends $Command<PutMetricStreamCommandInput, PutMetricStreamCommandOutput, CloudWatchClientResolvedConfig> {
+    readonly input: PutMetricStreamCommandInput;
+    constructor(input: PutMetricStreamCommandInput);
+    /**
+     * @internal
+     */
+    resolveMiddleware(clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>, configuration: CloudWatchClientResolvedConfig, options?: __HttpHandlerOptions): Handler<PutMetricStreamCommandInput, PutMetricStreamCommandOutput>;
+    private serialize;
+    private deserialize;
+}

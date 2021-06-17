@@ -1,0 +1,14 @@
+import { DescribeJobExecutionCommandInput, DescribeJobExecutionCommandOutput } from "../commands/DescribeJobExecutionCommand";
+import { GetPendingJobExecutionsCommandInput, GetPendingJobExecutionsCommandOutput } from "../commands/GetPendingJobExecutionsCommand";
+import { StartNextPendingJobExecutionCommandInput, StartNextPendingJobExecutionCommandOutput } from "../commands/StartNextPendingJobExecutionCommand";
+import { UpdateJobExecutionCommandInput, UpdateJobExecutionCommandOutput } from "../commands/UpdateJobExecutionCommand";
+import { HttpRequest as __HttpRequest, HttpResponse as __HttpResponse } from "@aws-sdk/protocol-http";
+import { SerdeContext as __SerdeContext } from "@aws-sdk/types";
+export declare const serializeAws_restJson1DescribeJobExecutionCommand: (input: DescribeJobExecutionCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1GetPendingJobExecutionsCommand: (input: GetPendingJobExecutionsCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1StartNextPendingJobExecutionCommand: (input: StartNextPendingJobExecutionCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const serializeAws_restJson1UpdateJobExecutionCommand: (input: UpdateJobExecutionCommandInput, context: __SerdeContext) => Promise<__HttpRequest>;
+export declare const deserializeAws_restJson1DescribeJobExecutionCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<DescribeJobExecutionCommandOutput>;
+export declare const deserializeAws_restJson1GetPendingJobExecutionsCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<GetPendingJobExecutionsCommandOutput>;
+export declare const deserializeAws_restJson1StartNextPendingJobExecutionCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<StartNextPendingJobExecutionCommandOutput>;
+export declare const deserializeAws_restJson1UpdateJobExecutionCommand: (output: __HttpResponse, context: __SerdeContext) => Promise<UpdateJobExecutionCommandOutput>;

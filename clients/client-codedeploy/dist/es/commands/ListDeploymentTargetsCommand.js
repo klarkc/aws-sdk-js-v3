@@ -1,0 +1,65 @@
+import { __extends } from "tslib";
+import { ListDeploymentTargetsInput, ListDeploymentTargetsOutput } from "../models/models_0";
+import { deserializeAws_json1_1ListDeploymentTargetsCommand, serializeAws_json1_1ListDeploymentTargetsCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p> Returns an array of target IDs that are associated a deployment. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CodeDeployClient, ListDeploymentTargetsCommand } from "@aws-sdk/client-codedeploy"; // ES Modules import
+ * // const { CodeDeployClient, ListDeploymentTargetsCommand } = require("@aws-sdk/client-codedeploy"); // CommonJS import
+ * const client = new CodeDeployClient(config);
+ * const command = new ListDeploymentTargetsCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link ListDeploymentTargetsCommandInput} for command's `input` shape.
+ * @see {@link ListDeploymentTargetsCommandOutput} for command's `response` shape.
+ * @see {@link CodeDeployClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var ListDeploymentTargetsCommand = /** @class */ (function (_super) {
+    __extends(ListDeploymentTargetsCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function ListDeploymentTargetsCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    ListDeploymentTargetsCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "CodeDeployClient";
+        var commandName = "ListDeploymentTargetsCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: ListDeploymentTargetsInput.filterSensitiveLog,
+            outputFilterSensitiveLog: ListDeploymentTargetsOutput.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    ListDeploymentTargetsCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1ListDeploymentTargetsCommand(input, context);
+    };
+    ListDeploymentTargetsCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1ListDeploymentTargetsCommand(output, context);
+    };
+    return ListDeploymentTargetsCommand;
+}($Command));
+export { ListDeploymentTargetsCommand };
+//# sourceMappingURL=ListDeploymentTargetsCommand.js.map

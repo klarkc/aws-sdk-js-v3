@@ -1,0 +1,45 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.paginateListTrails = void 0;
+const CloudTrail_1 = require("../CloudTrail");
+const CloudTrailClient_1 = require("../CloudTrailClient");
+const ListTrailsCommand_1 = require("../commands/ListTrailsCommand");
+/**
+ * @private
+ */
+const makePagedClientRequest = async (client, input, ...args) => {
+    // @ts-ignore
+    return await client.send(new ListTrailsCommand_1.ListTrailsCommand(input), ...args);
+};
+/**
+ * @private
+ */
+const makePagedRequest = async (client, input, ...args) => {
+    // @ts-ignore
+    return await client.listTrails(input, ...args);
+};
+async function* paginateListTrails(config, input, ...additionalArguments) {
+    // ToDo: replace with actual type instead of typeof input.NextToken
+    let token = config.startingToken || undefined;
+    let hasNext = true;
+    let page;
+    while (hasNext) {
+        input.NextToken = token;
+        if (config.client instanceof CloudTrail_1.CloudTrail) {
+            page = await makePagedRequest(config.client, input, ...additionalArguments);
+        }
+        else if (config.client instanceof CloudTrailClient_1.CloudTrailClient) {
+            page = await makePagedClientRequest(config.client, input, ...additionalArguments);
+        }
+        else {
+            throw new Error("Invalid client, expected CloudTrail | CloudTrailClient");
+        }
+        yield page;
+        token = page.NextToken;
+        hasNext = !!token;
+    }
+    // @ts-ignore
+    return undefined;
+}
+exports.paginateListTrails = paginateListTrails;
+//# sourceMappingURL=ListTrailsPaginator.js.map

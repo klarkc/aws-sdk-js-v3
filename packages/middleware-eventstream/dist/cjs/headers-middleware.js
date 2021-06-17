@@ -1,0 +1,26 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.eventStreamHeaderMiddlewareOptions = exports.eventStreamHeaderMiddleware = void 0;
+const protocol_http_1 = require("@aws-sdk/protocol-http");
+const eventStreamHeaderMiddleware = (next) => async (args) => {
+    const { request } = args;
+    if (!protocol_http_1.HttpRequest.isInstance(request))
+        return next(args);
+    request.headers = {
+        ...request.headers,
+        "Content-Type": "application/vnd.amazon.eventstream",
+        "x-amz-content-sha256": "STREAMING-AWS4-HMAC-SHA256-EVENTS",
+    };
+    return next({
+        ...args,
+        request,
+    });
+};
+exports.eventStreamHeaderMiddleware = eventStreamHeaderMiddleware;
+exports.eventStreamHeaderMiddlewareOptions = {
+    step: "build",
+    tags: ["EVENT_STREAM", "HEADER", "CONTENT_TYPE", "CONTENT_SHA256"],
+    name: "eventStreamHeaderMiddleware",
+    override: true,
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGVhZGVycy1taWRkbGV3YXJlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL2hlYWRlcnMtbWlkZGxld2FyZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSwwREFBcUQ7QUFFOUMsTUFBTSwyQkFBMkIsR0FBOEIsQ0FBQyxJQUFJLEVBQUUsRUFBRSxDQUFDLEtBQUssRUFBRSxJQUFJLEVBQUUsRUFBRTtJQUM3RixNQUFNLEVBQUUsT0FBTyxFQUFFLEdBQUcsSUFBSSxDQUFDO0lBQ3pCLElBQUksQ0FBQywyQkFBVyxDQUFDLFVBQVUsQ0FBQyxPQUFPLENBQUM7UUFBRSxPQUFPLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUN4RCxPQUFPLENBQUMsT0FBTyxHQUFHO1FBQ2hCLEdBQUcsT0FBTyxDQUFDLE9BQU87UUFDbEIsY0FBYyxFQUFFLG9DQUFvQztRQUNwRCxzQkFBc0IsRUFBRSxtQ0FBbUM7S0FDNUQsQ0FBQztJQUNGLE9BQU8sSUFBSSxDQUFDO1FBQ1YsR0FBRyxJQUFJO1FBQ1AsT0FBTztLQUNSLENBQUMsQ0FBQztBQUNMLENBQUMsQ0FBQztBQVpXLFFBQUEsMkJBQTJCLCtCQVl0QztBQUVXLFFBQUEsa0NBQWtDLEdBQXdCO0lBQ3JFLElBQUksRUFBRSxPQUFPO0lBQ2IsSUFBSSxFQUFFLENBQUMsY0FBYyxFQUFFLFFBQVEsRUFBRSxjQUFjLEVBQUUsZ0JBQWdCLENBQUM7SUFDbEUsSUFBSSxFQUFFLDZCQUE2QjtJQUNuQyxRQUFRLEVBQUUsSUFBSTtDQUNmLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBIdHRwUmVxdWVzdCB9IGZyb20gXCJAYXdzLXNkay9wcm90b2NvbC1odHRwXCI7XG5pbXBvcnQgeyBCdWlsZEhhbmRsZXJPcHRpb25zLCBCdWlsZE1pZGRsZXdhcmUgfSBmcm9tIFwiQGF3cy1zZGsvdHlwZXNcIjtcbmV4cG9ydCBjb25zdCBldmVudFN0cmVhbUhlYWRlck1pZGRsZXdhcmU6IEJ1aWxkTWlkZGxld2FyZTxhbnksIGFueT4gPSAobmV4dCkgPT4gYXN5bmMgKGFyZ3MpID0+IHtcbiAgY29uc3QgeyByZXF1ZXN0IH0gPSBhcmdzO1xuICBpZiAoIUh0dHBSZXF1ZXN0LmlzSW5zdGFuY2UocmVxdWVzdCkpIHJldHVybiBuZXh0KGFyZ3MpO1xuICByZXF1ZXN0LmhlYWRlcnMgPSB7XG4gICAgLi4ucmVxdWVzdC5oZWFkZXJzLFxuICAgIFwiQ29udGVudC1UeXBlXCI6IFwiYXBwbGljYXRpb24vdm5kLmFtYXpvbi5ldmVudHN0cmVhbVwiLFxuICAgIFwieC1hbXotY29udGVudC1zaGEyNTZcIjogXCJTVFJFQU1JTkctQVdTNC1ITUFDLVNIQTI1Ni1FVkVOVFNcIixcbiAgfTtcbiAgcmV0dXJuIG5leHQoe1xuICAgIC4uLmFyZ3MsXG4gICAgcmVxdWVzdCxcbiAgfSk7XG59O1xuXG5leHBvcnQgY29uc3QgZXZlbnRTdHJlYW1IZWFkZXJNaWRkbGV3YXJlT3B0aW9uczogQnVpbGRIYW5kbGVyT3B0aW9ucyA9IHtcbiAgc3RlcDogXCJidWlsZFwiLFxuICB0YWdzOiBbXCJFVkVOVF9TVFJFQU1cIiwgXCJIRUFERVJcIiwgXCJDT05URU5UX1RZUEVcIiwgXCJDT05URU5UX1NIQTI1NlwiXSxcbiAgbmFtZTogXCJldmVudFN0cmVhbUhlYWRlck1pZGRsZXdhcmVcIixcbiAgb3ZlcnJpZGU6IHRydWUsXG59O1xuIl19

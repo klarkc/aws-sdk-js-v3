@@ -1,0 +1,46 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.paginateGetReplicationRuns = void 0;
+const SMS_1 = require("../SMS");
+const SMSClient_1 = require("../SMSClient");
+const GetReplicationRunsCommand_1 = require("../commands/GetReplicationRunsCommand");
+/**
+ * @private
+ */
+const makePagedClientRequest = async (client, input, ...args) => {
+    // @ts-ignore
+    return await client.send(new GetReplicationRunsCommand_1.GetReplicationRunsCommand(input), ...args);
+};
+/**
+ * @private
+ */
+const makePagedRequest = async (client, input, ...args) => {
+    // @ts-ignore
+    return await client.getReplicationRuns(input, ...args);
+};
+async function* paginateGetReplicationRuns(config, input, ...additionalArguments) {
+    // ToDo: replace with actual type instead of typeof input.nextToken
+    let token = config.startingToken || undefined;
+    let hasNext = true;
+    let page;
+    while (hasNext) {
+        input.nextToken = token;
+        input["maxResults"] = config.pageSize;
+        if (config.client instanceof SMS_1.SMS) {
+            page = await makePagedRequest(config.client, input, ...additionalArguments);
+        }
+        else if (config.client instanceof SMSClient_1.SMSClient) {
+            page = await makePagedClientRequest(config.client, input, ...additionalArguments);
+        }
+        else {
+            throw new Error("Invalid client, expected SMS | SMSClient");
+        }
+        yield page;
+        token = page.nextToken;
+        hasNext = !!token;
+    }
+    // @ts-ignore
+    return undefined;
+}
+exports.paginateGetReplicationRuns = paginateGetReplicationRuns;
+//# sourceMappingURL=GetReplicationRunsPaginator.js.map

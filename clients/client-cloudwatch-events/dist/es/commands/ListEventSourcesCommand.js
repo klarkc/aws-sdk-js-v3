@@ -1,0 +1,66 @@
+import { __extends } from "tslib";
+import { ListEventSourcesRequest, ListEventSourcesResponse } from "../models/models_0";
+import { deserializeAws_json1_1ListEventSourcesCommand, serializeAws_json1_1ListEventSourcesCommand, } from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>You can use this to see all the partner event sources that have been shared with your AWS
+ *       account. For more information about partner event sources, see <a>CreateEventBus</a>.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { CloudWatchEventsClient, ListEventSourcesCommand } from "@aws-sdk/client-cloudwatch-events"; // ES Modules import
+ * // const { CloudWatchEventsClient, ListEventSourcesCommand } = require("@aws-sdk/client-cloudwatch-events"); // CommonJS import
+ * const client = new CloudWatchEventsClient(config);
+ * const command = new ListEventSourcesCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link ListEventSourcesCommandInput} for command's `input` shape.
+ * @see {@link ListEventSourcesCommandOutput} for command's `response` shape.
+ * @see {@link CloudWatchEventsClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var ListEventSourcesCommand = /** @class */ (function (_super) {
+    __extends(ListEventSourcesCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function ListEventSourcesCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    ListEventSourcesCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "CloudWatchEventsClient";
+        var commandName = "ListEventSourcesCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: ListEventSourcesRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: ListEventSourcesResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    ListEventSourcesCommand.prototype.serialize = function (input, context) {
+        return serializeAws_json1_1ListEventSourcesCommand(input, context);
+    };
+    ListEventSourcesCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_json1_1ListEventSourcesCommand(output, context);
+    };
+    return ListEventSourcesCommand;
+}($Command));
+export { ListEventSourcesCommand };
+//# sourceMappingURL=ListEventSourcesCommand.js.map

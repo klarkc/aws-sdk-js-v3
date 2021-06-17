@@ -1,0 +1,65 @@
+import { __extends } from "tslib";
+import { DeleteRoleAliasRequest, DeleteRoleAliasResponse } from "../models/models_0";
+import { deserializeAws_restJson1DeleteRoleAliasCommand, serializeAws_restJson1DeleteRoleAliasCommand, } from "../protocols/Aws_restJson1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Deletes a role alias</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { IoTClient, DeleteRoleAliasCommand } from "@aws-sdk/client-iot"; // ES Modules import
+ * // const { IoTClient, DeleteRoleAliasCommand } = require("@aws-sdk/client-iot"); // CommonJS import
+ * const client = new IoTClient(config);
+ * const command = new DeleteRoleAliasCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DeleteRoleAliasCommandInput} for command's `input` shape.
+ * @see {@link DeleteRoleAliasCommandOutput} for command's `response` shape.
+ * @see {@link IoTClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var DeleteRoleAliasCommand = /** @class */ (function (_super) {
+    __extends(DeleteRoleAliasCommand, _super);
+    // Start section: command_properties
+    // End section: command_properties
+    function DeleteRoleAliasCommand(input) {
+        var _this = 
+        // Start section: command_constructor
+        _super.call(this) || this;
+        _this.input = input;
+        return _this;
+        // End section: command_constructor
+    }
+    /**
+     * @internal
+     */
+    DeleteRoleAliasCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+        this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+        var stack = clientStack.concat(this.middlewareStack);
+        var logger = configuration.logger;
+        var clientName = "IoTClient";
+        var commandName = "DeleteRoleAliasCommand";
+        var handlerExecutionContext = {
+            logger: logger,
+            clientName: clientName,
+            commandName: commandName,
+            inputFilterSensitiveLog: DeleteRoleAliasRequest.filterSensitiveLog,
+            outputFilterSensitiveLog: DeleteRoleAliasResponse.filterSensitiveLog,
+        };
+        var requestHandler = configuration.requestHandler;
+        return stack.resolve(function (request) {
+            return requestHandler.handle(request.request, options || {});
+        }, handlerExecutionContext);
+    };
+    DeleteRoleAliasCommand.prototype.serialize = function (input, context) {
+        return serializeAws_restJson1DeleteRoleAliasCommand(input, context);
+    };
+    DeleteRoleAliasCommand.prototype.deserialize = function (output, context) {
+        return deserializeAws_restJson1DeleteRoleAliasCommand(output, context);
+    };
+    return DeleteRoleAliasCommand;
+}($Command));
+export { DeleteRoleAliasCommand };
+//# sourceMappingURL=DeleteRoleAliasCommand.js.map
