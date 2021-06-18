@@ -1,0 +1,70 @@
+import { __extends } from "tslib";
+import { DeleteMethodRequest } from "../models/models_0";
+import {
+  deserializeAws_restJson1DeleteMethodCommand,
+  serializeAws_restJson1DeleteMethodCommand,
+} from "../protocols/Aws_restJson1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Deletes an existing <a>Method</a> resource.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { APIGatewayClient, DeleteMethodCommand } from "@aws-sdk/client-api-gateway"; // ES Modules import
+ * // const { APIGatewayClient, DeleteMethodCommand } = require("@aws-sdk/client-api-gateway"); // CommonJS import
+ * const client = new APIGatewayClient(config);
+ * const command = new DeleteMethodCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DeleteMethodCommandInput} for command's `input` shape.
+ * @see {@link DeleteMethodCommandOutput} for command's `response` shape.
+ * @see {@link APIGatewayClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var DeleteMethodCommand = /** @class */ (function (_super) {
+  __extends(DeleteMethodCommand, _super);
+  // Start section: command_properties
+  // End section: command_properties
+  function DeleteMethodCommand(input) {
+    var _this =
+      // Start section: command_constructor
+      _super.call(this) || this;
+    _this.input = input;
+    return _this;
+    // End section: command_constructor
+  }
+  /**
+   * @internal
+   */
+  DeleteMethodCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+    var stack = clientStack.concat(this.middlewareStack);
+    var logger = configuration.logger;
+    var clientName = "APIGatewayClient";
+    var commandName = "DeleteMethodCommand";
+    var handlerExecutionContext = {
+      logger: logger,
+      clientName: clientName,
+      commandName: commandName,
+      inputFilterSensitiveLog: DeleteMethodRequest.filterSensitiveLog,
+      outputFilterSensitiveLog: function (output) {
+        return output;
+      },
+    };
+    var requestHandler = configuration.requestHandler;
+    return stack.resolve(function (request) {
+      return requestHandler.handle(request.request, options || {});
+    }, handlerExecutionContext);
+  };
+  DeleteMethodCommand.prototype.serialize = function (input, context) {
+    return serializeAws_restJson1DeleteMethodCommand(input, context);
+  };
+  DeleteMethodCommand.prototype.deserialize = function (output, context) {
+    return deserializeAws_restJson1DeleteMethodCommand(output, context);
+  };
+  return DeleteMethodCommand;
+})($Command);
+export { DeleteMethodCommand };
+//# sourceMappingURL=DeleteMethodCommand.js.map

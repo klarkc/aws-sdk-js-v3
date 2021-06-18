@@ -1,0 +1,68 @@
+import { __extends } from "tslib";
+import { DescribeUsageReportSubscriptionsRequest, DescribeUsageReportSubscriptionsResult } from "../models/models_0";
+import {
+  deserializeAws_json1_1DescribeUsageReportSubscriptionsCommand,
+  serializeAws_json1_1DescribeUsageReportSubscriptionsCommand,
+} from "../protocols/Aws_json1_1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Retrieves a list that describes one or more usage report subscriptions.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { AppStreamClient, DescribeUsageReportSubscriptionsCommand } from "@aws-sdk/client-appstream"; // ES Modules import
+ * // const { AppStreamClient, DescribeUsageReportSubscriptionsCommand } = require("@aws-sdk/client-appstream"); // CommonJS import
+ * const client = new AppStreamClient(config);
+ * const command = new DescribeUsageReportSubscriptionsCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DescribeUsageReportSubscriptionsCommandInput} for command's `input` shape.
+ * @see {@link DescribeUsageReportSubscriptionsCommandOutput} for command's `response` shape.
+ * @see {@link AppStreamClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var DescribeUsageReportSubscriptionsCommand = /** @class */ (function (_super) {
+  __extends(DescribeUsageReportSubscriptionsCommand, _super);
+  // Start section: command_properties
+  // End section: command_properties
+  function DescribeUsageReportSubscriptionsCommand(input) {
+    var _this =
+      // Start section: command_constructor
+      _super.call(this) || this;
+    _this.input = input;
+    return _this;
+    // End section: command_constructor
+  }
+  /**
+   * @internal
+   */
+  DescribeUsageReportSubscriptionsCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+    var stack = clientStack.concat(this.middlewareStack);
+    var logger = configuration.logger;
+    var clientName = "AppStreamClient";
+    var commandName = "DescribeUsageReportSubscriptionsCommand";
+    var handlerExecutionContext = {
+      logger: logger,
+      clientName: clientName,
+      commandName: commandName,
+      inputFilterSensitiveLog: DescribeUsageReportSubscriptionsRequest.filterSensitiveLog,
+      outputFilterSensitiveLog: DescribeUsageReportSubscriptionsResult.filterSensitiveLog,
+    };
+    var requestHandler = configuration.requestHandler;
+    return stack.resolve(function (request) {
+      return requestHandler.handle(request.request, options || {});
+    }, handlerExecutionContext);
+  };
+  DescribeUsageReportSubscriptionsCommand.prototype.serialize = function (input, context) {
+    return serializeAws_json1_1DescribeUsageReportSubscriptionsCommand(input, context);
+  };
+  DescribeUsageReportSubscriptionsCommand.prototype.deserialize = function (output, context) {
+    return deserializeAws_json1_1DescribeUsageReportSubscriptionsCommand(output, context);
+  };
+  return DescribeUsageReportSubscriptionsCommand;
+})($Command);
+export { DescribeUsageReportSubscriptionsCommand };
+//# sourceMappingURL=DescribeUsageReportSubscriptionsCommand.js.map

@@ -1,0 +1,68 @@
+import { __extends } from "tslib";
+import { DeregisterJobDefinitionRequest, DeregisterJobDefinitionResponse } from "../models/models_0";
+import {
+  deserializeAws_restJson1DeregisterJobDefinitionCommand,
+  serializeAws_restJson1DeregisterJobDefinitionCommand,
+} from "../protocols/Aws_restJson1";
+import { getSerdePlugin } from "@aws-sdk/middleware-serde";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+/**
+ * <p>Deregisters an AWS Batch job definition. Job definitions are permanently deleted after 180 days.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { BatchClient, DeregisterJobDefinitionCommand } from "@aws-sdk/client-batch"; // ES Modules import
+ * // const { BatchClient, DeregisterJobDefinitionCommand } = require("@aws-sdk/client-batch"); // CommonJS import
+ * const client = new BatchClient(config);
+ * const command = new DeregisterJobDefinitionCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DeregisterJobDefinitionCommandInput} for command's `input` shape.
+ * @see {@link DeregisterJobDefinitionCommandOutput} for command's `response` shape.
+ * @see {@link BatchClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+var DeregisterJobDefinitionCommand = /** @class */ (function (_super) {
+  __extends(DeregisterJobDefinitionCommand, _super);
+  // Start section: command_properties
+  // End section: command_properties
+  function DeregisterJobDefinitionCommand(input) {
+    var _this =
+      // Start section: command_constructor
+      _super.call(this) || this;
+    _this.input = input;
+    return _this;
+    // End section: command_constructor
+  }
+  /**
+   * @internal
+   */
+  DeregisterJobDefinitionCommand.prototype.resolveMiddleware = function (clientStack, configuration, options) {
+    this.middlewareStack.use(getSerdePlugin(configuration, this.serialize, this.deserialize));
+    var stack = clientStack.concat(this.middlewareStack);
+    var logger = configuration.logger;
+    var clientName = "BatchClient";
+    var commandName = "DeregisterJobDefinitionCommand";
+    var handlerExecutionContext = {
+      logger: logger,
+      clientName: clientName,
+      commandName: commandName,
+      inputFilterSensitiveLog: DeregisterJobDefinitionRequest.filterSensitiveLog,
+      outputFilterSensitiveLog: DeregisterJobDefinitionResponse.filterSensitiveLog,
+    };
+    var requestHandler = configuration.requestHandler;
+    return stack.resolve(function (request) {
+      return requestHandler.handle(request.request, options || {});
+    }, handlerExecutionContext);
+  };
+  DeregisterJobDefinitionCommand.prototype.serialize = function (input, context) {
+    return serializeAws_restJson1DeregisterJobDefinitionCommand(input, context);
+  };
+  DeregisterJobDefinitionCommand.prototype.deserialize = function (output, context) {
+    return deserializeAws_restJson1DeregisterJobDefinitionCommand(output, context);
+  };
+  return DeregisterJobDefinitionCommand;
+})($Command);
+export { DeregisterJobDefinitionCommand };
+//# sourceMappingURL=DeregisterJobDefinitionCommand.js.map

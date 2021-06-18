@@ -1,0 +1,46 @@
+import { AppConfigClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../AppConfigClient";
+import { Environments, ListEnvironmentsRequest } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import {
+  Handler,
+  MiddlewareStack,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetadataBearer as __MetadataBearer,
+} from "@aws-sdk/types";
+export interface ListEnvironmentsCommandInput extends ListEnvironmentsRequest {}
+export interface ListEnvironmentsCommandOutput extends Environments, __MetadataBearer {}
+/**
+ * <p>List the environments for an application.</p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { AppConfigClient, ListEnvironmentsCommand } from "@aws-sdk/client-appconfig"; // ES Modules import
+ * // const { AppConfigClient, ListEnvironmentsCommand } = require("@aws-sdk/client-appconfig"); // CommonJS import
+ * const client = new AppConfigClient(config);
+ * const command = new ListEnvironmentsCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link ListEnvironmentsCommandInput} for command's `input` shape.
+ * @see {@link ListEnvironmentsCommandOutput} for command's `response` shape.
+ * @see {@link AppConfigClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class ListEnvironmentsCommand extends $Command<
+  ListEnvironmentsCommandInput,
+  ListEnvironmentsCommandOutput,
+  AppConfigClientResolvedConfig
+> {
+  readonly input: ListEnvironmentsCommandInput;
+  constructor(input: ListEnvironmentsCommandInput);
+  /**
+   * @internal
+   */
+  resolveMiddleware(
+    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
+    configuration: AppConfigClientResolvedConfig,
+    options?: __HttpHandlerOptions
+  ): Handler<ListEnvironmentsCommandInput, ListEnvironmentsCommandOutput>;
+  private serialize;
+  private deserialize;
+}

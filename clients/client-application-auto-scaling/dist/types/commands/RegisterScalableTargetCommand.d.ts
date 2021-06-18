@@ -1,0 +1,64 @@
+import {
+  ApplicationAutoScalingClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../ApplicationAutoScalingClient";
+import { RegisterScalableTargetRequest, RegisterScalableTargetResponse } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import {
+  Handler,
+  MiddlewareStack,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetadataBearer as __MetadataBearer,
+} from "@aws-sdk/types";
+export interface RegisterScalableTargetCommandInput extends RegisterScalableTargetRequest {}
+export interface RegisterScalableTargetCommandOutput extends RegisterScalableTargetResponse, __MetadataBearer {}
+/**
+ * <p>Registers or updates a scalable target. </p>
+ *          <p>A scalable target is a resource that Application Auto Scaling can scale out and scale in. Scalable
+ *          targets are uniquely identified by the combination of resource ID, scalable dimension, and
+ *          namespace. </p>
+ *          <p>When you register a new scalable target, you must specify values for minimum and maximum
+ *          capacity. Current capacity will be adjusted within the specified range when scaling starts.
+ *          Application Auto Scaling scaling policies will not scale capacity to values that are outside of this
+ *          range.</p>
+ *          <p>After you register a scalable target, you do not need to register it again to use other
+ *          Application Auto Scaling operations. To see which resources have been registered, use <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html">DescribeScalableTargets</a>. You can also view the scaling policies for a service
+ *          namespace by using <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html">DescribeScalableTargets</a>. If you no longer need a scalable target, you can
+ *          deregister it by using <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DeregisterScalableTarget.html">DeregisterScalableTarget</a>.</p>
+ *          <p>To update a scalable target, specify the parameters that you want to change. Include the
+ *          parameters that identify the scalable target: resource ID, scalable dimension, and
+ *          namespace. Any parameters that you don't specify are not changed by this update request. </p>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ApplicationAutoScalingClient, RegisterScalableTargetCommand } from "@aws-sdk/client-application-auto-scaling"; // ES Modules import
+ * // const { ApplicationAutoScalingClient, RegisterScalableTargetCommand } = require("@aws-sdk/client-application-auto-scaling"); // CommonJS import
+ * const client = new ApplicationAutoScalingClient(config);
+ * const command = new RegisterScalableTargetCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link RegisterScalableTargetCommandInput} for command's `input` shape.
+ * @see {@link RegisterScalableTargetCommandOutput} for command's `response` shape.
+ * @see {@link ApplicationAutoScalingClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class RegisterScalableTargetCommand extends $Command<
+  RegisterScalableTargetCommandInput,
+  RegisterScalableTargetCommandOutput,
+  ApplicationAutoScalingClientResolvedConfig
+> {
+  readonly input: RegisterScalableTargetCommandInput;
+  constructor(input: RegisterScalableTargetCommandInput);
+  /**
+   * @internal
+   */
+  resolveMiddleware(
+    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
+    configuration: ApplicationAutoScalingClientResolvedConfig,
+    options?: __HttpHandlerOptions
+  ): Handler<RegisterScalableTargetCommandInput, RegisterScalableTargetCommandOutput>;
+  private serialize;
+  private deserialize;
+}

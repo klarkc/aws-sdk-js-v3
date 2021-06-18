@@ -1,0 +1,243 @@
+import {
+  AddTagsToCertificateCommandInput,
+  AddTagsToCertificateCommandOutput,
+} from "./commands/AddTagsToCertificateCommand";
+import { DeleteCertificateCommandInput, DeleteCertificateCommandOutput } from "./commands/DeleteCertificateCommand";
+import {
+  DescribeCertificateCommandInput,
+  DescribeCertificateCommandOutput,
+} from "./commands/DescribeCertificateCommand";
+import { ExportCertificateCommandInput, ExportCertificateCommandOutput } from "./commands/ExportCertificateCommand";
+import {
+  GetAccountConfigurationCommandInput,
+  GetAccountConfigurationCommandOutput,
+} from "./commands/GetAccountConfigurationCommand";
+import { GetCertificateCommandInput, GetCertificateCommandOutput } from "./commands/GetCertificateCommand";
+import { ImportCertificateCommandInput, ImportCertificateCommandOutput } from "./commands/ImportCertificateCommand";
+import { ListCertificatesCommandInput, ListCertificatesCommandOutput } from "./commands/ListCertificatesCommand";
+import {
+  ListTagsForCertificateCommandInput,
+  ListTagsForCertificateCommandOutput,
+} from "./commands/ListTagsForCertificateCommand";
+import {
+  PutAccountConfigurationCommandInput,
+  PutAccountConfigurationCommandOutput,
+} from "./commands/PutAccountConfigurationCommand";
+import {
+  RemoveTagsFromCertificateCommandInput,
+  RemoveTagsFromCertificateCommandOutput,
+} from "./commands/RemoveTagsFromCertificateCommand";
+import { RenewCertificateCommandInput, RenewCertificateCommandOutput } from "./commands/RenewCertificateCommand";
+import { RequestCertificateCommandInput, RequestCertificateCommandOutput } from "./commands/RequestCertificateCommand";
+import {
+  ResendValidationEmailCommandInput,
+  ResendValidationEmailCommandOutput,
+} from "./commands/ResendValidationEmailCommand";
+import {
+  UpdateCertificateOptionsCommandInput,
+  UpdateCertificateOptionsCommandOutput,
+} from "./commands/UpdateCertificateOptionsCommand";
+import {
+  EndpointsInputConfig,
+  EndpointsResolvedConfig,
+  RegionInputConfig,
+  RegionResolvedConfig,
+} from "@aws-sdk/config-resolver";
+import { HostHeaderInputConfig, HostHeaderResolvedConfig } from "@aws-sdk/middleware-host-header";
+import { RetryInputConfig, RetryResolvedConfig } from "@aws-sdk/middleware-retry";
+import { AwsAuthInputConfig, AwsAuthResolvedConfig } from "@aws-sdk/middleware-signing";
+import { UserAgentInputConfig, UserAgentResolvedConfig } from "@aws-sdk/middleware-user-agent";
+import { HttpHandler as __HttpHandler } from "@aws-sdk/protocol-http";
+import {
+  Client as __Client,
+  SmithyConfiguration as __SmithyConfiguration,
+  SmithyResolvedConfiguration as __SmithyResolvedConfiguration,
+} from "@aws-sdk/smithy-client";
+import {
+  Provider,
+  RegionInfoProvider,
+  Credentials as __Credentials,
+  Decoder as __Decoder,
+  Encoder as __Encoder,
+  HashConstructor as __HashConstructor,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  Logger as __Logger,
+  Provider as __Provider,
+  StreamCollector as __StreamCollector,
+  UrlParser as __UrlParser,
+  UserAgent as __UserAgent,
+} from "@aws-sdk/types";
+export declare type ServiceInputTypes =
+  | AddTagsToCertificateCommandInput
+  | DeleteCertificateCommandInput
+  | DescribeCertificateCommandInput
+  | ExportCertificateCommandInput
+  | GetAccountConfigurationCommandInput
+  | GetCertificateCommandInput
+  | ImportCertificateCommandInput
+  | ListCertificatesCommandInput
+  | ListTagsForCertificateCommandInput
+  | PutAccountConfigurationCommandInput
+  | RemoveTagsFromCertificateCommandInput
+  | RenewCertificateCommandInput
+  | RequestCertificateCommandInput
+  | ResendValidationEmailCommandInput
+  | UpdateCertificateOptionsCommandInput;
+export declare type ServiceOutputTypes =
+  | AddTagsToCertificateCommandOutput
+  | DeleteCertificateCommandOutput
+  | DescribeCertificateCommandOutput
+  | ExportCertificateCommandOutput
+  | GetAccountConfigurationCommandOutput
+  | GetCertificateCommandOutput
+  | ImportCertificateCommandOutput
+  | ListCertificatesCommandOutput
+  | ListTagsForCertificateCommandOutput
+  | PutAccountConfigurationCommandOutput
+  | RemoveTagsFromCertificateCommandOutput
+  | RenewCertificateCommandOutput
+  | RequestCertificateCommandOutput
+  | ResendValidationEmailCommandOutput
+  | UpdateCertificateOptionsCommandOutput;
+export interface ClientDefaults extends Partial<__SmithyResolvedConfiguration<__HttpHandlerOptions>> {
+  /**
+   * The HTTP handler to use. Fetch in browser and Https in Nodejs.
+   */
+  requestHandler?: __HttpHandler;
+  /**
+   * A constructor for a class implementing the @aws-sdk/types.Hash interface
+   * that computes the SHA-256 HMAC or checksum of a string or binary buffer.
+   * @internal
+   */
+  sha256?: __HashConstructor;
+  /**
+   * The function that will be used to convert strings into HTTP endpoints.
+   * @internal
+   */
+  urlParser?: __UrlParser;
+  /**
+   * A function that can calculate the length of a request body.
+   * @internal
+   */
+  bodyLengthChecker?: (body: any) => number | undefined;
+  /**
+   * A function that converts a stream into an array of bytes.
+   * @internal
+   */
+  streamCollector?: __StreamCollector;
+  /**
+   * The function that will be used to convert a base64-encoded string to a byte array.
+   * @internal
+   */
+  base64Decoder?: __Decoder;
+  /**
+   * The function that will be used to convert binary data to a base64-encoded string.
+   * @internal
+   */
+  base64Encoder?: __Encoder;
+  /**
+   * The function that will be used to convert a UTF8-encoded string to a byte array.
+   * @internal
+   */
+  utf8Decoder?: __Decoder;
+  /**
+   * The function that will be used to convert binary data to a UTF-8 encoded string.
+   * @internal
+   */
+  utf8Encoder?: __Encoder;
+  /**
+   * The runtime environment.
+   * @internal
+   */
+  runtime?: string;
+  /**
+   * Disable dyanamically changing the endpoint of the client based on the hostPrefix
+   * trait of an operation.
+   */
+  disableHostPrefix?: boolean;
+  /**
+   * Unique service identifier.
+   * @internal
+   */
+  serviceId?: string;
+  /**
+   * The AWS region to which this client will send requests
+   */
+  region?: string | __Provider<string>;
+  /**
+   * Value for how many times a request will be made at most in case of retry.
+   */
+  maxAttempts?: number | __Provider<number>;
+  /**
+   * Specifies provider for retry algorithm to use.
+   * @internal
+   */
+  retryModeProvider?: __Provider<string>;
+  /**
+   * Optional logger for logging debug/info/warn/error.
+   */
+  logger?: __Logger;
+  /**
+   * Default credentials provider; Not available in browser runtime.
+   * @internal
+   */
+  credentialDefaultProvider?: (input: any) => __Provider<__Credentials>;
+  /**
+   * Fetch related hostname, signing name or signing region with given region.
+   * @internal
+   */
+  regionInfoProvider?: RegionInfoProvider;
+  /**
+   * The provider populating default tracking information to be sent with `user-agent`, `x-amz-user-agent` header
+   * @internal
+   */
+  defaultUserAgentProvider?: Provider<__UserAgent>;
+}
+declare type ACMClientConfigType = Partial<__SmithyConfiguration<__HttpHandlerOptions>> &
+  ClientDefaults &
+  RegionInputConfig &
+  EndpointsInputConfig &
+  RetryInputConfig &
+  HostHeaderInputConfig &
+  AwsAuthInputConfig &
+  UserAgentInputConfig;
+/**
+ * The configuration interface of ACMClient class constructor that set the region, credentials and other options.
+ */
+export interface ACMClientConfig extends ACMClientConfigType {}
+declare type ACMClientResolvedConfigType = __SmithyResolvedConfiguration<__HttpHandlerOptions> &
+  Required<ClientDefaults> &
+  RegionResolvedConfig &
+  EndpointsResolvedConfig &
+  RetryResolvedConfig &
+  HostHeaderResolvedConfig &
+  AwsAuthResolvedConfig &
+  UserAgentResolvedConfig;
+/**
+ * The resolved configuration interface of ACMClient class. This is resolved and normalized from the {@link ACMClientConfig | constructor configuration interface}.
+ */
+export interface ACMClientResolvedConfig extends ACMClientResolvedConfigType {}
+/**
+ * <fullname>AWS Certificate Manager</fullname>
+ *          <p>You can use AWS Certificate Manager (ACM) to manage SSL/TLS certificates for your AWS-based websites
+ *       and applications. For more information about using ACM, see the <a href="https://docs.aws.amazon.com/acm/latest/userguide/">AWS Certificate Manager User Guide</a>.</p>
+ */
+export declare class ACMClient extends __Client<
+  __HttpHandlerOptions,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+  ACMClientResolvedConfig
+> {
+  /**
+   * The resolved configuration of ACMClient class. This is resolved and normalized from the {@link ACMClientConfig | constructor configuration interface}.
+   */
+  readonly config: ACMClientResolvedConfig;
+  constructor(configuration: ACMClientConfig);
+  /**
+   * Destroy underlying resources, like sockets. It's usually not necessary to do this.
+   * However in Node.js, it's best to explicitly shut down the client's agent when it is no longer needed.
+   * Otherwise, sockets might stay open for quite a long time before the server terminates them.
+   */
+  destroy(): void;
+}
+export {};

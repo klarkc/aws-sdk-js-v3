@@ -1,0 +1,53 @@
+import { ACMClientResolvedConfig, ServiceInputTypes, ServiceOutputTypes } from "../ACMClient";
+import { DeleteCertificateRequest } from "../models/models_0";
+import { Command as $Command } from "@aws-sdk/smithy-client";
+import {
+  Handler,
+  MiddlewareStack,
+  HttpHandlerOptions as __HttpHandlerOptions,
+  MetadataBearer as __MetadataBearer,
+} from "@aws-sdk/types";
+export interface DeleteCertificateCommandInput extends DeleteCertificateRequest {}
+export interface DeleteCertificateCommandOutput extends __MetadataBearer {}
+/**
+ * <p>Deletes a certificate and its associated private key. If this action succeeds, the
+ *       certificate no longer appears in the list that can be displayed by calling the <a>ListCertificates</a> action or be retrieved by calling the <a>GetCertificate</a> action. The certificate will not be available for use by AWS
+ *       services integrated with ACM. </p>
+ *          <note>
+ *             <p>You cannot delete an ACM certificate that is being used by another AWS service. To
+ *         delete a certificate that is in use, the certificate association must first be
+ *         removed.</p>
+ *          </note>
+ * @example
+ * Use a bare-bones client and the command you need to make an API call.
+ * ```javascript
+ * import { ACMClient, DeleteCertificateCommand } from "@aws-sdk/client-acm"; // ES Modules import
+ * // const { ACMClient, DeleteCertificateCommand } = require("@aws-sdk/client-acm"); // CommonJS import
+ * const client = new ACMClient(config);
+ * const command = new DeleteCertificateCommand(input);
+ * const response = await client.send(command);
+ * ```
+ *
+ * @see {@link DeleteCertificateCommandInput} for command's `input` shape.
+ * @see {@link DeleteCertificateCommandOutput} for command's `response` shape.
+ * @see {@link ACMClientResolvedConfig | config} for command's `input` shape.
+ *
+ */
+export declare class DeleteCertificateCommand extends $Command<
+  DeleteCertificateCommandInput,
+  DeleteCertificateCommandOutput,
+  ACMClientResolvedConfig
+> {
+  readonly input: DeleteCertificateCommandInput;
+  constructor(input: DeleteCertificateCommandInput);
+  /**
+   * @internal
+   */
+  resolveMiddleware(
+    clientStack: MiddlewareStack<ServiceInputTypes, ServiceOutputTypes>,
+    configuration: ACMClientResolvedConfig,
+    options?: __HttpHandlerOptions
+  ): Handler<DeleteCertificateCommandInput, DeleteCertificateCommandOutput>;
+  private serialize;
+  private deserialize;
+}
